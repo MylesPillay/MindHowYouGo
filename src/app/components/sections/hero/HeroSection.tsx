@@ -1,21 +1,46 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { getSupabaseServer } from "@/utils/api/supabase";
 
-type HeroRow = { company_name: string | null; intro_message: string | null };
+type HeroData = {
+	company_name: string | null;
+	intro_message: string | null;
+	cta_message: string | null;
+	cta_button_text: string | null;
+};
 
-type Props = { initialHero: HeroRow | null };
+const HeroSection = () => {
+	const [animateGlow, _setAnimateGlow] = useState(true);
+	const [initialHero, setInitialHero] = useState<HeroData | null>(null);
+	const [loading, setLoading] = useState(true);
+	const [fadeIn, setFadeIn] = useState(false);
 
-const HeroSection = ({ initialHero }: Props) => {
-	const [animateGlow, setAnimateGlow] = useState(true);
+	React.useEffect(() => {
+		if (!loading) {
+			// Trigger fade-in after loading is complete
+			const timeout = setTimeout(() => setFadeIn(true), 50);
+			return () => clearTimeout(timeout);
+		}
+	}, [loading]);
 
-	useEffect(() => {
-		const handleScroll = () => setAnimateGlow(true);
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
+	React.useEffect(() => {
+		const fetchHero = async () => {
+			const supabase = getSupabaseServer();
+			const { data, error } = await supabase
+				.from("content_hero_section")
+				.select("*");
+
+			if (error) {
+				console.error("Hero fetch error:", error);
+			}
+			setInitialHero((data?.[0] as HeroData) ?? null);
+			setLoading(false);
+		};
+		fetchHero();
 	}, []);
 
-	const words = useMemo(
+	const companyTitle = useMemo(
 		() =>
 			initialHero?.company_name
 				? initialHero.company_name.split(" ")
@@ -23,9 +48,20 @@ const HeroSection = ({ initialHero }: Props) => {
 		[initialHero?.company_name]
 	);
 
+	if (loading) {
+		return (
+			<div className='flex h-[86vh] items-center justify-center w-full'>
+				<div className='animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary'></div>
+			</div>
+		);
+	}
+
 	return (
 		<>
-			<section className='flex flex-col align-middle items-center justify-around w-full h-auto overflow-visible pb-16'>
+			<section
+				className={`flex flex-col align-middle items-center justify-around w-full h-auto overflow-visible pb-16 transition-opacity duration-1000 ${
+					fadeIn ? "opacity-100" : "opacity-0"
+				}`}>
 				<div
 					className='flex flex-col lg:flex-row w-full h-auto'
 					aria-labelledby='hero-title'
@@ -62,16 +98,16 @@ const HeroSection = ({ initialHero }: Props) => {
 						text-center text-primary
 						xl:text-8xl lg:text-6xl md:text-4xl text-3xl'>
 							<span className='mr-2 font-light'>
-								{words[0] ?? ""}
+								{companyTitle[0] ?? ""}
 							</span>
 							<span className='mr-2 font-light text-primary-secondary text-opacity-80'>
-								{(words[1] ?? "").toLowerCase()}
+								{(companyTitle[1] ?? "").toLowerCase()}
 							</span>
 							<span className='mr-2.5 font-light text-primary-secondary text-opacity-80'>
-								{(words[2] ?? "").toLowerCase()}
+								{(companyTitle[2] ?? "").toLowerCase()}
 							</span>
 							<span className='font-medium text-primary-foreground'>
-								{words[3] ?? ""}
+								{companyTitle[3] ?? ""}
 							</span>
 						</h1>
 
@@ -79,14 +115,14 @@ const HeroSection = ({ initialHero }: Props) => {
 							id='hero-subtitle'
 							className='relative text-primary-secondary font-light text-center w-full pr-40
 								xl:text-4xl lg:text-3xl md:text-2xl text-3xl'>
-							{initialHero?.intro_message ?? "Welcome"}
+							{initialHero?.intro_message || ""}
 						</h2>
 					</div>
 				</div>
 				{/* CTA Row */}
 				<div className='mt-20 flex flex-col md:flex-row gap-4 h-full items-center text-left'>
 					<h3 className='inline-block p-2 text-4xl font-light text-center text-primary'>
-						Are you ready to change your life and
+						{initialHero?.cta_message || ""}
 					</h3>
 
 					<button
@@ -101,7 +137,7 @@ const HeroSection = ({ initialHero }: Props) => {
 						}}
 						className='px-8 py-4 ml-1 text-2xl font-medium text-white rounded-full bg-gradient-to-r from-primary/60 to-primary-secondary transition-all duration-500 ease-in-out shadow-md hover:shadow-lg hover:brightness-110 hover:scale-105 hover:to-primary-foreground hover:from-primary border-2 border-opacity-100 border-yellow-400'
 						aria-label='Scroll to About Me section'>
-						Take Action
+						{initialHero?.cta_button_text || "Take Action"}
 					</button>
 				</div>
 			</section>

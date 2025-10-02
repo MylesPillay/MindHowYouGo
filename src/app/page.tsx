@@ -9,7 +9,6 @@ import { ClinicalExperience } from "./components/sections/experience/Home/Clinic
 import AnimatedSectionTitle from "./components/layout/headers/AnimatedTitle";
 import SectionTitleClear from "./components/layout/headers/SectionTitleClear";
 
-import { getSupabaseServer } from "@/utils/api/supabase";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -38,26 +37,10 @@ export const metadata: Metadata = {
 	}
 };
 
-export const revalidate = 60; // optional ISR
-
 export default async function Home() {
-	const supabase = getSupabaseServer();
-
-	const { data, error } = await supabase
-		.from("content_hero_section")
-		.select("company_name,intro_message")
-		.limit(1)
-		.single();
-
-	if (error) {
-		console.error("Hero fetch error:", error);
-	}
-
-	const initialHero = data ?? null;
-
 	return (
 		<div className='flex flex-col justify-between w-[100%] overflow-x-hidden'>
-			<HeroSection initialHero={initialHero} />
+			<HeroSection />
 			<AboutMe id='about-me' />
 			<div className='my-2 md:my-8' />
 			<SectionTitleClear title={`What can I expect from therapy?`} />

@@ -77,12 +77,39 @@ export type Database = {
         }
         Relationships: []
       }
+      content_cbt_explained: {
+        Row: {
+          created_at: string
+          id: number
+          services_text_content: Json | null
+          text_content: Json | null
+          text_highlghts: Json | null
+          urls: Json | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          services_text_content?: Json | null
+          text_content?: Json | null
+          text_highlghts?: Json | null
+          urls?: Json | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          services_text_content?: Json | null
+          text_content?: Json | null
+          text_highlghts?: Json | null
+          urls?: Json | null
+        }
+        Relationships: []
+      }
       content_hero_section: {
         Row: {
           company_name: string | null
           created_at: string
           cta_button_text: string | null
-          cta_url: string | null
+          cta_message: string | null
           hero_image: Json | null
           id: number
           intro_message: string | null
@@ -91,7 +118,7 @@ export type Database = {
           company_name?: string | null
           created_at?: string
           cta_button_text?: string | null
-          cta_url?: string | null
+          cta_message?: string | null
           hero_image?: Json | null
           id?: number
           intro_message?: string | null
@@ -100,7 +127,7 @@ export type Database = {
           company_name?: string | null
           created_at?: string
           cta_button_text?: string | null
-          cta_url?: string | null
+          cta_message?: string | null
           hero_image?: Json | null
           id?: number
           intro_message?: string | null
