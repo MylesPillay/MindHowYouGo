@@ -12,7 +12,7 @@ import SectionTitleClear from "./components/layout/headers/SectionTitleClear";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "CBT Therapy in Bristol | BABCP-Accredited | Free Intro Call",
+	title: "Mind How You Go | CBT Therapy with Dr Kiran Sharma.",
 	description:
 		"Collaborative, hands-on CBT with a BABCP-accredited therapist. Free introductory call. Video or walk-and-talk sessions in Bristol's green spaces. Progress reviewed regularly.",
 	keywords: [

@@ -52,7 +52,7 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 										className='text-primary-foreground mb-2 shrink-0'
 										size={20}
 									/>
-									<p className='text-primary-secondary text-lg text-center md:text-left pt-4 mb-4 line-clamp-4 p-6'>
+									<p className='text-primary-secondary text-xl text-center md:text-left pt-4 mb-4 line-clamp-4 p-6'>
 										{testimonial.text}
 									</p>
 									<FaQuoteRight
@@ -77,7 +77,7 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 										className='text-primary mb-2 shrink-0'
 										size={20}
 									/>
-									<p className='text-primary-secondary text-lg text-center md:text-left mb-4 p-6'>
+									<p className='text-primary-secondary text-xl text-center md:text-left mb-4 p-6'>
 										{testimonial.text}
 									</p>
 									<FaQuoteRight

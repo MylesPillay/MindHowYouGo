@@ -24,7 +24,7 @@ const HeroSection = () => {
 		}
 	}, [loading]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const fetchHero = async () => {
 			const supabase = getSupabaseServer();
 			const { data, error } = await supabase

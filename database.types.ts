@@ -104,6 +104,30 @@ export type Database = {
         }
         Relationships: []
       }
+      content_clinic: {
+        Row: {
+          category: string | null
+          created_at: string
+          icon: string | null
+          id: number
+          list_items: Json | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          icon?: string | null
+          id?: number
+          list_items?: Json | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          icon?: string | null
+          id?: number
+          list_items?: Json | null
+        }
+        Relationships: []
+      }
       content_hero_section: {
         Row: {
           company_name: string | null
@@ -134,36 +158,6 @@ export type Database = {
         }
         Relationships: []
       }
-      content_services: {
-        Row: {
-          created_at: string
-          id: number
-          service_description: string | null
-          service_icon: string | null
-          service_index: string | null
-          service_is_active: boolean | null
-          service_title: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          service_description?: string | null
-          service_icon?: string | null
-          service_index?: string | null
-          service_is_active?: boolean | null
-          service_title?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          service_description?: string | null
-          service_icon?: string | null
-          service_index?: string | null
-          service_is_active?: boolean | null
-          service_title?: string | null
-        }
-        Relationships: []
-      }
       content_testimonials: {
         Row: {
           created_at: string
@@ -191,6 +185,42 @@ export type Database = {
           testimony_description?: string | null
           testimony_heading?: string | null
           testimony_name?: string | null
+        }
+        Relationships: []
+      }
+      home_text_blocks_clinic: {
+        Row: {
+          created_at: string
+          id: number
+          section_title: string | null
+          text_highlight_1: string | null
+          text_highlight_2: string | null
+          text_highlight_3: string | null
+          text_slice_1: string | null
+          text_slice_2: string | null
+          text_slice_3: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          section_title?: string | null
+          text_highlight_1?: string | null
+          text_highlight_2?: string | null
+          text_highlight_3?: string | null
+          text_slice_1?: string | null
+          text_slice_2?: string | null
+          text_slice_3?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          section_title?: string | null
+          text_highlight_1?: string | null
+          text_highlight_2?: string | null
+          text_highlight_3?: string | null
+          text_slice_1?: string | null
+          text_slice_2?: string | null
+          text_slice_3?: string | null
         }
         Relationships: []
       }
