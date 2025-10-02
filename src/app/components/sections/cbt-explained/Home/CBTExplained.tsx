@@ -1,85 +1,137 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import TextBox from "../../../layout/containers/TextBox";
 import AnimatedSectionTitle from "@/app/components/layout/headers/AnimatedTitle";
 import Image from "next/image";
+import { getSupabaseServer } from "@/utils/api/supabase";
+import { LoadingBlock } from "@/app/components/layout/loading/LoadingBlock";
+
+interface ContentDataType {
+	section_title: string;
+	top_box_text_slice_1: string;
+	top_box_text_slice_2: string;
+	therapy_text_slice_1: string;
+	therapy_text_highlight_1: string;
+	therapy_text_slice_2: string;
+	therapy_text_highlight_2: string;
+	therapy_text_slice_3: string;
+	therapy_text_highlight_3: string;
+	therapy_text_slice_4: string;
+	therapy_text_highlight_4: string;
+	therapy_text_slice_5: string;
+	therapy_text_highlight_5: string;
+	therapy_text_slice_6: string;
+	therapy_text_highlight_6: string;
+	therapy_text_slice_7: string;
+	therapy_text_highlight_7: string;
+	therapy_text_slice_8: string;
+	therapy_text_slice_9: string;
+	therapy_text_slice_10: string;
+	walk_and_talk_text_slice_1: string;
+	walk_and_talk_text_slice_2: string;
+	walk_and_talk_text_slice_3: string;
+	walk_and_talk_link_text: string;
+}
 
 const CBTExplained = () => {
+	const [content, setContent] = useState<ContentDataType | null>(null);
+	const [loading, setLoading] = useState(true);
+	const [fadeIn, setFadeIn] = useState(false);
+
+	React.useEffect(() => {
+		if (!loading) {
+			const timeout = setTimeout(() => setFadeIn(true), 50);
+			return () => clearTimeout(timeout);
+		}
+	}, [loading]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const supabase = getSupabaseServer();
+			const { data, error } = await supabase
+				.from("content_cbt_text_blocks")
+				.select("*");
+
+			if (error) {
+				console.error("Why Me data fetch error:", error);
+			}
+
+			setContent(data?.[0] as ContentDataType);
+
+			setLoading(false);
+		};
+		fetchData();
+	}, []);
+
+	if (!content) {
+		return <LoadingBlock />;
+	}
+
 	const cbtExplainedContent = {
-		title: "What to	expect from therapy with me",
+		title: content.section_title,
 		topBox: {
-			line1: "Initial 20 min no-obligation introduction call",
-			line2: "Free of charge"
+			line1: content.top_box_text_slice_1,
+			line2: content.top_box_text_slice_2
 		},
 		therapyWithMe: {
 			1: (
 				<p>
-					I understand finding the right therapist can be tricky, this
-					is a chance for us to say hello by phone or video call and
-					to have your questions answered and provide the reassurance
-					needed to take your{" "}
+					{content.therapy_text_slice_1}{" "}
 					<span className='font-normal text-primary'>
-						next step forwards
+						{content.therapy_text_highlight_1}
 					</span>
 				</p>
 			),
 			2: (
 				<p>
-					Typically the first steps involve assessing and reviewing
-					your mental health — exploring where any problems started
-					and why they persist. This builds a foundation to explore
-					how you can make{" "}
+					{content.therapy_text_slice_2}{" "}
 					<span className='font-semibold text-primary-foreground'>
-						lasting changes
+						{content.therapy_text_highlight_2}
 					</span>{" "}
-					and work together, side by side,{" "}
+					{content.therapy_text_slice_3}{" "}
 					<span className='font-medium text-primary'>
-						one step at a time
+						{content.therapy_text_highlight_3}
 					</span>
 					.
 				</p>
 			),
 			3: (
 				<p>
-					Collaborative “hands-on” therapy. It's not just about
-					talking. We share the decision making process to ensure
-					you're involved in the{" "}
+					{content.therapy_text_slice_4}{" "}
 					<span className='text-primary-foreground font-medium'>
-						direction
+						{content.therapy_text_highlight_4}
 					</span>{" "}
-					of your therapy throughout.
+					{content.therapy_text_slice_5}{" "}
 				</p>
 			),
 			4: (
 				<p>
-					Progress is monitored and reviewed regularly, so you have a,{" "}
+					{content.therapy_text_slice_6}{" "}
 					<span className='font-medium text-primary-foreground'>
-						clear sense
+						{content.therapy_text_highlight_5}
 					</span>{" "}
-					of whether therapy is working. It can be tricky living with
-					a human mind — there are no miracle cures or quick fixes. My
-					aim is to{" "}
+					{content.therapy_text_slice_7}{" "}
 					<span className='font-medium text-primary'>
-						instil hope
+						{content.therapy_text_highlight_6}
 					</span>{" "}
-					and help you{" "}
+					{content.therapy_text_slice_8}{" "}
 					<span className='italic font-semibold'>
-						Mind How you go
+						{content.therapy_text_slice_9}
 					</span>{" "}
-					until you can do it alone.
+					{content.therapy_text_slice_10}
 				</p>
 			)
 		},
 		walkAndTalk: {
-			1: "I currently offer one-to-one regular 60-minute video-call sessions, but am aware sitting down for a traditional therapy session is not everyone's cup of tea. A lot of our lives are now online based, so walk and talk therapy is a great option that gets us out in the fresh air and can enhance the therapeutic process.",
-			2: "If this sounds appealing further treatment sessions can be “walk and talk” appointments -  with so many lovely green spaces in Bristol, there are many walking routes we can utilise.",
+			1: content.walk_and_talk_text_slice_1,
+			2: content.walk_and_talk_text_slice_2,
 			3: (
 				<p>
-					Walking and talking for well-being: Exploring the
-					effectiveness of walk and talk therapy.{" "}
+					{content.walk_and_talk_text_slice_3}{" "}
 					<a
 						href='https://www.bacp.co.uk/bacp-journals/healthcare-counselling-and-psychotherapy-journal/2024/articles-october/walking-and-talking/'
 						className='text-primary hover:text-primary-foreground font-medium'>
-						Counselling and Psychotherapy Research
+						{content.walk_and_talk_link_text}
 					</a>
 					.
 				</p>

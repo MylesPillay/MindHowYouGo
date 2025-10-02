@@ -104,6 +104,96 @@ export type Database = {
         }
         Relationships: []
       }
+      content_cbt_text_blocks: {
+        Row: {
+          created_at: string
+          id: number
+          section_title: string | null
+          therapy_text_highlight_1: string | null
+          therapy_text_highlight_2: string | null
+          therapy_text_highlight_3: string | null
+          therapy_text_highlight_4: string | null
+          therapy_text_highlight_5: string | null
+          therapy_text_highlight_6: string | null
+          therapy_text_highlight_7: string | null
+          therapy_text_slice_1: string | null
+          therapy_text_slice_10: string | null
+          therapy_text_slice_2: string | null
+          therapy_text_slice_3: string | null
+          therapy_text_slice_4: string | null
+          therapy_text_slice_5: string | null
+          therapy_text_slice_6: string | null
+          therapy_text_slice_7: string | null
+          therapy_text_slice_8: string | null
+          therapy_text_slice_9: string | null
+          top_box_text_slice_1: string | null
+          top_box_text_slice_2: string | null
+          walk_and_talk_link_text: string | null
+          walk_and_talk_link_url: string | null
+          walk_and_talk_text_slice_1: string | null
+          walk_and_talk_text_slice_2: string | null
+          walk_and_talk_text_slice_3: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          section_title?: string | null
+          therapy_text_highlight_1?: string | null
+          therapy_text_highlight_2?: string | null
+          therapy_text_highlight_3?: string | null
+          therapy_text_highlight_4?: string | null
+          therapy_text_highlight_5?: string | null
+          therapy_text_highlight_6?: string | null
+          therapy_text_highlight_7?: string | null
+          therapy_text_slice_1?: string | null
+          therapy_text_slice_10?: string | null
+          therapy_text_slice_2?: string | null
+          therapy_text_slice_3?: string | null
+          therapy_text_slice_4?: string | null
+          therapy_text_slice_5?: string | null
+          therapy_text_slice_6?: string | null
+          therapy_text_slice_7?: string | null
+          therapy_text_slice_8?: string | null
+          therapy_text_slice_9?: string | null
+          top_box_text_slice_1?: string | null
+          top_box_text_slice_2?: string | null
+          walk_and_talk_link_text?: string | null
+          walk_and_talk_link_url?: string | null
+          walk_and_talk_text_slice_1?: string | null
+          walk_and_talk_text_slice_2?: string | null
+          walk_and_talk_text_slice_3?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          section_title?: string | null
+          therapy_text_highlight_1?: string | null
+          therapy_text_highlight_2?: string | null
+          therapy_text_highlight_3?: string | null
+          therapy_text_highlight_4?: string | null
+          therapy_text_highlight_5?: string | null
+          therapy_text_highlight_6?: string | null
+          therapy_text_highlight_7?: string | null
+          therapy_text_slice_1?: string | null
+          therapy_text_slice_10?: string | null
+          therapy_text_slice_2?: string | null
+          therapy_text_slice_3?: string | null
+          therapy_text_slice_4?: string | null
+          therapy_text_slice_5?: string | null
+          therapy_text_slice_6?: string | null
+          therapy_text_slice_7?: string | null
+          therapy_text_slice_8?: string | null
+          therapy_text_slice_9?: string | null
+          top_box_text_slice_1?: string | null
+          top_box_text_slice_2?: string | null
+          walk_and_talk_link_text?: string | null
+          walk_and_talk_link_url?: string | null
+          walk_and_talk_text_slice_1?: string | null
+          walk_and_talk_text_slice_2?: string | null
+          walk_and_talk_text_slice_3?: string | null
+        }
+        Relationships: []
+      }
       content_clinic: {
         Row: {
           category: string | null
