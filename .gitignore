@@ -1,0 +1,41 @@
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+.next/cache/
+coverage/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Env files anywhere (keep only the example)
+**/.env
+**/.env.*
+!**/.env.example
+
+# Vercel
+.vercel/
+
+# Supabase (keep code & migrations; ignore temp/build artifacts)
+supabase/.branches/
+supabase/.temp/
+supabase/**/node_modules/
+supabase/**/dist/
+supabase/functions/**/vendor/
+
+# Docker local volumes (if any)
+docker-data/

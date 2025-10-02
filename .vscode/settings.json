@@ -1,0 +1,42 @@
+{
+	"[typescript]": {
+		"editor.defaultFormatter": "denoland.vscode-deno"
+	},
+	"cSpell.ignoreWords": ["amet"],
+	"cSpell.words": [
+		"adipiscing",
+		"auctor",
+		"eget",
+		"elementum",
+		"elit",
+		"felis",
+		"interdum",
+		"Kiran",
+		"nunc",
+		"odio",
+		"Phasellus",
+		"posuere",
+		"Praesent",
+		"Sharma",
+		"sollicitudin",
+		"ullamcorper"
+	],
+	"deno.enablePaths": ["supabase/functions"],
+	"deno.lint": true,
+	"deno.unstable": [
+		"bare-node-builtins",
+		"byonm",
+		"sloppy-imports",
+		"unsafe-proto",
+		"webgpu",
+		"broadcast-channel",
+		"worker-options",
+		"cron",
+		"kv",
+		"ffi",
+		"fs",
+		"http",
+		"net"
+	],
+	"deno.enable": true
+}
