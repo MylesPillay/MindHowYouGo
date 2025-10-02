@@ -1,7 +1,4 @@
-// import { supabase } from "@/utils/supabase";
-
-import { supabase } from "@/utils/api/supabase";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabaseServer } from "@/utils/api/supabase";
 
 
 
@@ -17,7 +14,7 @@ export const useInsertContact = () => {
 			// const { data, error } = await supabase
 			// 	.from("contacts")
 			// 	.insert([{  contact_name: name, contact_email: email, contact_number: number, contact_message: message }]);
-						const { data, error } = await supabase
+						const { data, error } = await getSupabaseServer()
   .from("contacts")
   .select("*")
   .order("created_at", { ascending: false })
