@@ -188,6 +188,48 @@ export type Database = {
         }
         Relationships: []
       }
+      content_why_me: {
+        Row: {
+          created_at: string
+          cta_text_slice_1: string | null
+          cta_text_slice_2: string | null
+          cta_text_slice_3: string | null
+          id: number
+          legal_text_slice_1: string | null
+          legal_text_slice_2: string | null
+          legal_text_slice_3: string | null
+          section_title: string | null
+          text_block_1: string | null
+          text_block_2: string | null
+        }
+        Insert: {
+          created_at?: string
+          cta_text_slice_1?: string | null
+          cta_text_slice_2?: string | null
+          cta_text_slice_3?: string | null
+          id?: number
+          legal_text_slice_1?: string | null
+          legal_text_slice_2?: string | null
+          legal_text_slice_3?: string | null
+          section_title?: string | null
+          text_block_1?: string | null
+          text_block_2?: string | null
+        }
+        Update: {
+          created_at?: string
+          cta_text_slice_1?: string | null
+          cta_text_slice_2?: string | null
+          cta_text_slice_3?: string | null
+          id?: number
+          legal_text_slice_1?: string | null
+          legal_text_slice_2?: string | null
+          legal_text_slice_3?: string | null
+          section_title?: string | null
+          text_block_1?: string | null
+          text_block_2?: string | null
+        }
+        Relationships: []
+      }
       home_text_blocks_clinic: {
         Row: {
           created_at: string

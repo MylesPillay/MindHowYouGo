@@ -5,6 +5,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { getSupabaseServer } from "@/utils/api/supabase";
+import { LoadingBlock } from "@/app/components/layout/loading/LoadingBlock";
 
 export interface ClinicalExperienceRow {
 	category: string;
@@ -65,11 +66,7 @@ const ClinicalExperience = () => {
 	}, []);
 
 	if (!content || content.length === 0) {
-		return (
-			<div className='flex h-[86vh] items-center justify-center w-full'>
-				<div className='animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary'></div>
-			</div>
-		);
+		return <LoadingBlock />;
 	}
 
 	const activeCategory = content[activeIndex] ?? content[0];

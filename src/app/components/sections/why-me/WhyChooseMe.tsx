@@ -1,23 +1,61 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TextBox from "../../layout/containers/TextBox";
 import Image from "next/image";
 import SectionTitleClear from "../../layout/headers/SectionTitleClear";
+import { getSupabaseServer } from "@/utils/api/supabase";
+import { LoadingBlock } from "../../layout/loading/LoadingBlock";
+
+interface ContentDataType {
+	section_title: string;
+	text_block_1: string;
+	text_block_2: string;
+	legal_text_slice_1: string;
+	legal_text_slice_2: string;
+	legal_text_slice_3: string;
+	cta_text_slice_1: string;
+	cta_text_slice_2: string;
+	cta_text_slice_3: string;
+}
 
 const WhyChooseMe = () => {
+	const [content, setContent] = useState<ContentDataType | null>(null);
+	const [loading, setLoading] = useState(true);
+	const [fadeIn, setFadeIn] = useState(false);
+
+	React.useEffect(() => {
+		if (!loading) {
+			const timeout = setTimeout(() => setFadeIn(true), 50);
+			return () => clearTimeout(timeout);
+		}
+	}, [loading]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const supabase = getSupabaseServer();
+			const { data, error } = await supabase
+				.from("content_why_me")
+				.select("*");
+
+			if (error) {
+				console.error("Why Me data fetch error:", error);
+			}
+			setContent((data?.[0] as ContentDataType) ?? null);
+			setLoading(false);
+		};
+		fetchData();
+	}, []);
+
+	if (!content) {
+		return <LoadingBlock />;
+	}
+
 	const whyChooseMeContent = {
-		title: "Why have therapy with me?",
+		title: content.section_title,
 		cbt: {
 			heading: "CBT",
-			body: (
-				<>
-					{/* TEXT (verbatim) */}
-					{
-						"Cognitive behavioural therapy (CBT) is a type of talking therapy which helps manage emotional problems by recognising and then adjusting the way we think, feel and behave. Often used to treat anxiety and depression but equally useful for many other mental and physical health problems too."
-					}
-				</>
-			)
+			body: content.text_block_1
 		},
 		accreditation: {
 			withLogo: true,
@@ -27,40 +65,29 @@ const WhyChooseMe = () => {
 				width: 220,
 				height: 90
 			},
-			body: (
-				<>
-					{/* TEXT (verbatim) */}
-					{
-						"I am accredited by the British Association for Behavioural and Cognitive Psychotherapies -  the leading governing body for CBT in the UK. With further training completed in Acceptance and Commitment Therapy and Psychological therapy for eating disorders. I receive regular clinical supervision from another registered therapist to ensure the therapy I deliver is of the highest quality."
-					}
-				</>
-			)
+			body: content.text_block_2
 		},
 		legalClarity: {
 			body: (
 				<>
-					{/* TEXT (verbatim) */}
-					{
-						"Be aware that the term “Therapist” currently has no legal protection in the UK — therefore anyone can use the title even if they have had no training at all! I am insured to practice therapy legally in the UK, following the "
-					}
+					{content.legal_text_slice_1}
 					<a
 						href='https://babcp.com/Standards'
 						target='_blank'
 						rel='noopener noreferrer'
 						className='text-primary underline font-semibold hover:opacity-90'
 						aria-label='Open BABCP code of ethics in a new tab'>
-						{"BABCP code of ethics"}
+						{content.legal_text_slice_2}
 					</a>
-					{" and maintain strict confidentiality at all times."}
+					{" " + content.legal_text_slice_3}
 				</>
 			)
 		},
 		finalCallout: {
 			body: (
 				<>
-					{/* TEXT (verbatim) */}
 					<p>
-						See my{" "}
+						{content.cta_text_slice_1}{" "}
 						<span
 							onClick={() => {
 								document
@@ -71,11 +98,9 @@ const WhyChooseMe = () => {
 									});
 							}}
 							className='text-primary font-semibold underline underline-offset-2 hover:opacity-90'>
-							{`Testimonials`}
+							{content.cta_text_slice_2}
 						</span>{" "}
-						page to hear from people I've worked with — and if you'd
-						like to see proof of my accreditation, I'll happily
-						provide it on request.
+						{content.cta_text_slice_3}
 					</p>
 				</>
 			)
@@ -85,7 +110,6 @@ const WhyChooseMe = () => {
 	return (
 		<>
 			<SectionTitleClear title={whyChooseMeContent.title} />
-
 			<div className='flex flex-col w-full h-auto pt-20 pb-16 justify-evenly items-center mx-auto gap-y-10'>
 				<h3 className='text-center w-full text-primary-secondary text-2xl font-light self-center max-w-[60vw] mt-10'>
 					{whyChooseMeContent.cbt.body}
@@ -100,7 +124,6 @@ const WhyChooseMe = () => {
 				<h3 className='text-primary-secondary text-2xl my-10 font-light justify-center text-center mx-auto md:max-w-[60%]'>
 					{whyChooseMeContent.accreditation.body}
 				</h3>
-				{/* ————— Accreditation & training ————— */}
 				<div className='flex flex-col md:flex-row-reverse w-[80%] justify-around items-center gap-8 px-4'>
 					{whyChooseMeContent.accreditation.withLogo && (
 						<div className='w-full md:w-[20%] rounded-2xl text-primary font-semibold text-5xl justify-around items-center self-center'>

@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { getSupabaseServer } from "@/utils/api/supabase";
+import { LoadingBlock } from "../../layout/loading/LoadingBlock";
 
 type HeroData = {
 	company_name: string | null;
@@ -49,11 +50,7 @@ const HeroSection = () => {
 	);
 
 	if (loading) {
-		return (
-			<div className='flex h-[86vh] items-center justify-center w-full'>
-				<div className='animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary'></div>
-			</div>
-		);
+		return <LoadingBlock />;
 	}
 
 	return (
