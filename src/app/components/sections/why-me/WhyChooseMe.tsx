@@ -19,7 +19,10 @@ interface ContentDataType {
 	cta_text_slice_3: string;
 }
 
-const WhyChooseMe = () => {
+interface WhyChooseMeProps {
+	abridged?: boolean;
+}
+const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 	const [content, setContent] = useState<ContentDataType | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [fadeIn, setFadeIn] = useState(false);
@@ -109,42 +112,60 @@ const WhyChooseMe = () => {
 
 	return (
 		<>
-			<SectionTitleClear title={whyChooseMeContent.title} />
-			<div className='flex flex-col w-full h-auto pt-20 pb-16 justify-evenly items-center mx-auto gap-y-10'>
+			{abridged ? null : (
+				<SectionTitleClear title={whyChooseMeContent.title} />
+			)}
+			<div
+				className={`flex flex-col w-full h-auto justify-evenly items-center mx-auto gap-y-10 ${
+					abridged ? "pt-20 mt-2" : "pt-20 pb-16"
+				}`}>
 				<h3 className='text-center w-full text-primary-secondary text-2xl font-light self-center max-w-[60vw] mt-10'>
 					{whyChooseMeContent.cbt.body}
 				</h3>
-				<TextBox
-					variant='light-long'
-					className='justify-center w-[65%] text-center mx-auto mt-16 '>
-					<h3 className='text-primary-secondary text-2xl font-light max-w-[70vw] p-6 mx-auto'>
-						{whyChooseMeContent.legalClarity.body}
-					</h3>
-				</TextBox>
-				<h3 className='text-primary-secondary text-2xl my-10 font-light justify-center text-center mx-auto md:max-w-[60%]'>
-					{whyChooseMeContent.accreditation.body}
-				</h3>
-				<div className='flex flex-col md:flex-row-reverse w-[80%] justify-around items-center gap-8 px-4'>
-					{whyChooseMeContent.accreditation.withLogo && (
-						<div className='w-full md:w-[20%] rounded-2xl text-primary font-semibold text-5xl justify-around items-center self-center'>
-							<Image
-								className='m-auto h-[140px] w-[180px]'
-								src={whyChooseMeContent.accreditation.logo.src}
-								alt={whyChooseMeContent.accreditation.logo.alt}
-								width={
-									whyChooseMeContent.accreditation.logo.width
-								}
-								height={
-									whyChooseMeContent.accreditation.logo.height
-								}
-								priority={false}
-							/>
+				{abridged ? null : (
+					<>
+						<TextBox
+							variant='light-long'
+							className='justify-center w-[65%] text-center mx-auto mt-16 '>
+							<h3 className='text-primary-secondary text-2xl font-light max-w-[70vw] p-6 mx-auto'>
+								{whyChooseMeContent.legalClarity.body}
+							</h3>
+						</TextBox>
+
+						<h3 className='text-primary-secondary text-2xl my-10 font-light justify-center text-center mx-auto md:max-w-[60%]'>
+							{whyChooseMeContent.accreditation.body}
+						</h3>
+						<div className='flex flex-col md:flex-row-reverse w-[80%] justify-around items-center gap-8 px-4'>
+							{whyChooseMeContent.accreditation.withLogo && (
+								<div className='w-full md:w-[20%] rounded-2xl text-primary font-semibold text-5xl justify-around items-center self-center'>
+									<Image
+										className='m-auto h-[140px] w-[180px]'
+										src={
+											whyChooseMeContent.accreditation
+												.logo.src
+										}
+										alt={
+											whyChooseMeContent.accreditation
+												.logo.alt
+										}
+										width={
+											whyChooseMeContent.accreditation
+												.logo.width
+										}
+										height={
+											whyChooseMeContent.accreditation
+												.logo.height
+										}
+										priority={false}
+									/>
+								</div>
+							)}
+							<h3 className='flex text-center w-[75%] ml-20 p-2 text-primary-secondary text-2xl font-light self-center'>
+								{whyChooseMeContent.finalCallout.body}
+							</h3>
 						</div>
-					)}
-					<h3 className='flex text-center w-[75%] ml-20 p-2 text-primary-secondary text-2xl font-light self-center'>
-						{whyChooseMeContent.finalCallout.body}
-					</h3>
-				</div>
+					</>
+				)}
 			</div>
 		</>
 	);

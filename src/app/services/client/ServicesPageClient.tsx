@@ -1,32 +1,40 @@
 "use client";
-
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
-import { ServicesCBTExplained } from "../../components/sections/cbt-explained/Services/ServicesCBTExplained";
-import { ServicesClinicalExperience } from "../../components/sections/experience/Services/ServicesClinicalExperience";
-import { ServicesSection } from "../../components/sections/services/Services/Services";
 import ServicesContactForm from "../../components/sections/contact/Services/ServicesContactForm";
-import TextBox from "../../components/layout/containers/TextBox";
 import ServicesNav, {
 	type PaneTab
 } from "../../components/layout/navigation/ServicesNav";
+import { ClinicalExperience } from "@/app/components/sections/experience/Home/ClinicalExperience";
+import BottomCTASection from "../components/BottomCTASection/BottomCTASection";
+import { CBTExplained } from "@/app/components/sections/cbt-explained/Home/CBTExplained";
+import { WhyChooseMe } from "@/app/components/sections/why-me/WhyChooseMe";
 
 const PANES = [
-	{ id: "services", title: "Services", render: () => <ServicesSection /> },
 	{
-		id: "cbt",
-		title: "CBT Explained",
-		render: () => <ServicesCBTExplained />
+		id: "services",
+		title: "CBT Treatment",
+		render: () => (
+			<>
+				<WhyChooseMe abridged={true} />
+				<CBTExplained abridged={true} />
+				<BottomCTASection />
+			</>
+		)
 	},
 	{
 		id: "experience",
 		title: "Clinical Experience",
-		render: () => <ServicesClinicalExperience />
+		render: () => (
+			<>
+				<ClinicalExperience />
+				<BottomCTASection />
+			</>
+		)
 	},
 	{
 		id: "contact",
 		title: "Contact",
-		render: () => <ServicesContactForm id='contact' />
+		render: () => <ServicesContactForm />
 	}
 ] as const;
 
