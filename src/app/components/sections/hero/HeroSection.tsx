@@ -24,7 +24,6 @@ const HeroSection = () => {
 			return () => clearTimeout(timeout);
 		}
 	}, [loading]);
-
 	useEffect(() => {
 		const fetchHero = async () => {
 			const supabase = getSupabaseServer();
@@ -38,7 +37,11 @@ const HeroSection = () => {
 			setInitialHero((data?.[0] as HeroData) ?? null);
 			setLoading(false);
 		};
-		fetchHero();
+		const timeout = setTimeout(() => {
+			fetchHero();
+		}, 300);
+
+		return () => clearTimeout(timeout);
 	}, []);
 
 	const companyTitle = useMemo(
