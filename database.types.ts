@@ -252,28 +252,19 @@ export type Database = {
         Row: {
           created_at: string
           id: number
-          linked_therapy: string | null
-          testimony_date: string | null
           testimony_description: string | null
-          testimony_heading: string | null
           testimony_name: string | null
         }
         Insert: {
           created_at?: string
           id?: number
-          linked_therapy?: string | null
-          testimony_date?: string | null
           testimony_description?: string | null
-          testimony_heading?: string | null
           testimony_name?: string | null
         }
         Update: {
           created_at?: string
           id?: number
-          linked_therapy?: string | null
-          testimony_date?: string | null
           testimony_description?: string | null
-          testimony_heading?: string | null
           testimony_name?: string | null
         }
         Relationships: []

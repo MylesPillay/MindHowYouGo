@@ -1,35 +1,65 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import AnimatedSectionTitle from "../../layout/headers/AnimatedTitle";
+import { LoadingBlock } from "../../layout/loading/LoadingBlock";
+import { getSupabaseServer } from "@/utils/api/supabase";
 
-const testimonials = [
-	{
-		name: "",
-		text: "Kiran was really friendly, helpful and had definitely changed my perspective. There are two areas that have significantly been helpful, and they are how to respond during panic attacks, and the shift away from reliance in others. I feel I can better manage during a Panic attack. I would rate Kiran 9/10 (wouldn't give anyone 10 as that would be describing them as perfect)."
-	},
-	{
-		name: "",
-		text: "Kiran was an incredible help to me, helping me to realise the issues and the problems I have suffered with, whilst also providing tools and methods to use in my day to day life. I threw myself into the therapy headfirst and took on board everything that we spoke about. In every session I had a ‘lightbulb moment’, where I would understand something about myself and be able to recognise how to help overcome it. It’s been a life changing 10 weeks and I can’t hold Kiran in any higher regard. He has helped me no end, and I believe that although it hasn’t always been easy, my life has improved ten fold. I look forward to living my life using these tools that were provided and know that I am still on a journey, but my path seems to be much easier to navigate now. I would like to thank Kiran and talking therapies for all the help I have received so far and I couldn’t recommend CBT more."
-	},
-	{
-		name: "",
-		text: "I have been able to deal with issues that I have bottled up over the years. It’s hard to explain in words but I just feel so much lighter and I’m enjoying life again. I have returned to work in a much better mental state, able to deal with any issues now. I still have moments of anxiety but I don't let these build into a mountain of fear that paralyses me. I know how to take time out to recharge and refocus."
-	},
-	{
-		name: "",
-		text: "The therapy I received from Kiran has helped me enormously. I have gained more understanding & learnt practical ways to control my emotions with CBT. I am now feeling much more confident in coping with my anxiety. I can’t thank Kiran enough for his support and help over the last few months."
-	},
-	{
-		name: "",
-		text: "Kiran was a patient and caring therapist. He was open and approachable at all times, while still maintaining focus in each session. He remembered things I said as far back as our first session and made connections even months later. I feel very lucky to have had him as my therapist, because CBT techniques which I previously only read about online now make more sense and I now believe I can implement them on my own."
-	},
-	{
-		name: "",
-		text: "Kiran was one of the only Therapist who actually helped me through with what I was going through. I never thought I would improve this well with my mental health, I honestly regard him highly because of it, his technique and ability to speak to me about my issues was very helpful. Thank you!!"
-	}
-];
+interface ContentDataTypeRow {
+	testimony_name?: string;
+	testimony_description?: string;
+	id: number;
+}
+interface ContentDataType extends Array<ContentDataTypeRow> {}
 
 const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
+	const [content, setContent] = useState<ContentDataType>([]);
+	const [loading, setLoading] = useState(true);
+	const [fadeIn, setFadeIn] = useState(false);
+
+	React.useEffect(() => {
+		if (!loading) {
+			const timeout = setTimeout(() => setFadeIn(true), 50);
+			return () => clearTimeout(timeout);
+		}
+	}, [loading]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const supabase = getSupabaseServer();
+			const { data, error } = await supabase
+				.from("content_testimonials")
+				.select("*");
+
+			if (error) {
+				console.error("Why Me data fetch error:", error);
+			}
+			setContent(
+				data
+					? data.map((item) => ({
+							testimony_name: item.testimony_name ?? undefined,
+							testimony_description:
+								item.testimony_description ?? undefined,
+							id: item.id
+					  }))
+					: []
+			);
+			setLoading(false);
+		};
+		fetchData();
+	}, []);
+
+	if (!content) {
+		return <LoadingBlock />;
+	}
+
+	const testimonials = [...content]
+		.sort((a, b) => a.id - b.id)
+		.map((testimonial) => ({
+			name: testimonial.testimony_name,
+			text: testimonial.testimony_description
+		}));
+
 	return (
 		<div className='flex flex-col items-center w-full pt-20 px-4 md:px-16'>
 			<AnimatedSectionTitle title='What People Say' className='pl-20' />
@@ -77,9 +107,14 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 										className='text-primary mb-2 shrink-0'
 										size={20}
 									/>
-									<p className='text-primary-secondary text-xl text-center md:text-left mb-4 p-6'>
-										{testimonial.text}
-									</p>
+									<div className='flex flex-col w-full text-left p-6 pb-2'>
+										<p className='text-primary-secondary text-xl text-center md:text-left mb-4'>
+											{testimonial.text}
+										</p>
+										<p className='text-primary text-xl text-left md:text-left pt-0 font-medium'>
+											{testimonial.name}
+										</p>
+									</div>
 									<FaQuoteRight
 										className='text-primary place-self-end mb-2 shrink-0'
 										size={20}
