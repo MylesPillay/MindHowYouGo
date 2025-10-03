@@ -1,24 +1,65 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import TextBox from "../../layout/containers/TextBox";
 import SectionTitleClear from "../../layout/headers/SectionTitleClear";
+import { LoadingBlock } from "../../layout/loading/LoadingBlock";
+import { getSupabaseServer } from "@/utils/api/supabase";
+
+interface ContentDataType {
+	section_title: string;
+	section_header: string;
+	section_main_text: string;
+	section_bottom_text_1: string;
+	section_click_text: string;
+	section_bottom_text_2: string;
+}
 
 const AboutMe = ({ id }: { id: string }) => {
+	const [content, setContent] = useState<ContentDataType | null>(null);
+	const [loading, setLoading] = useState(true);
+	const [fadeIn, setFadeIn] = useState(false);
+
+	React.useEffect(() => {
+		if (!loading) {
+			const timeout = setTimeout(() => setFadeIn(true), 50);
+			return () => clearTimeout(timeout);
+		}
+	}, [loading]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const supabase = getSupabaseServer();
+			const { data, error } = await supabase
+				.from("content_about_me")
+				.select("*");
+
+			if (error) {
+				console.error("Why Me data fetch error:", error);
+			}
+			setContent((data?.[0] as ContentDataType) ?? null);
+			setLoading(false);
+		};
+		fetchData();
+	}, []);
+
+	if (!content) {
+		return <LoadingBlock />;
+	}
 	const aboutMeContent = {
-		title: "About Me",
-		intro: "Hi, I'm Kiran",
-		body: "For 10 years I've worked within the NHS as a CBT therapist and trainee supervisor. 'Mind How You Go' is my private practice founded with the aim to  deliver quality care outside of NHS constraints. As a BABCP-accredited CBT therapist I offer practical, down-to-earth therapy focused on lasting change.",
+		title: content.section_title,
+		intro: content.section_header,
+		body: content.section_main_text,
 		closing: (
 			<p>
-				Click{" "}
+				{content.section_bottom_text_1}{" "}
 				<a
 					aria-label="text hyperlink navigating to 'Services' Page."
 					className='text-semibold text-primary'
 					href='/services'>
-					HERE
+					{content.section_click_text}
 				</a>{" "}
-				for more information regarding your journey with therapy, as
-				well as details on all services I currently provide.
+				{content.section_bottom_text_2}
 			</p>
 		)
 	};

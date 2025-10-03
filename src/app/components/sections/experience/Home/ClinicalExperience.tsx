@@ -105,7 +105,7 @@ const ClinicalExperience = () => {
 					{textBlocks?.section_title}
 				</h2>
 
-				<p className='w-[65%] text-center text-primary-secondary text-2xl font-light leading-relaxed'>
+				<p className='w-[65%] text-center text-primary-secondary text-2xl font-light leading-relaxed py-10'>
 					{textBlocks.text_slice_1}{" "}
 					<span className='text-primary-foreground font-medium'>
 						{textBlocks.text_highlight_1}
@@ -120,7 +120,7 @@ const ClinicalExperience = () => {
 					</span>
 				</p>
 
-				<div className='flex flex-col xl:flex-row w-[90%] max-w-[1100px] border-2 border-primary rounded-xl overflow-hidden shadow-sm'>
+				<div className='flex flex-col xl:flex-row w-[90%] max-w-[1100px] border-2 border-primary rounded-xl overflow-hidden shadow-sm my-10'>
 					{/* Left: Tablist */}
 					<div
 						className='flex flex-col w-full xl:w-[40%] border-r-2 border-primary'

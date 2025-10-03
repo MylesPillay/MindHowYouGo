@@ -166,7 +166,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 			</p>
 
 			<form
-				className='flex flex-col justify-center w-[70%] mt-12'
+				className='flex flex-col justify-center w-[70%] my-20'
 				onSubmit={handleSubmit(onSubmit)}
 				aria-describedby={statusId}>
 				{/* Name + Phone */}
