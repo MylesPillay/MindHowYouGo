@@ -281,6 +281,24 @@ export type Database = {
         }
         Relationships: []
       }
+      content_privacy_notice: {
+        Row: {
+          created_at: string
+          id: number
+          privacy_notice: Json | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          privacy_notice?: Json | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          privacy_notice?: Json | null
+        }
+        Relationships: []
+      }
       content_testimonials: {
         Row: {
           created_at: string

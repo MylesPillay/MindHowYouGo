@@ -59,7 +59,7 @@ const HeroSection = () => {
 	return (
 		<>
 			<section
-				className={`flex flex-col align-middle items-center justify-around w-full h-auto overflow-visible pb-16 transition-opacity duration-1000 ${
+				className={`flex flex-col align-middle items-center justify-around w-full h-auto overflow-visible pb-10 transition-opacity duration-1000 ${
 					fadeIn ? "opacity-100" : "opacity-0"
 				}`}>
 				<div

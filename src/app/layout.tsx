@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import walkingData from "../../public/assets/animations/walking.json";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.mindhowyougo.co.uk"),
@@ -48,11 +49,31 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className='flex relative flex-col h-full w-full text-white overflow-x-hidden'>
-				<ClientRoot>{children}</ClientRoot>
+			{/* single body lives here */}
+			<body className='flex min-h-screen w-full flex-col text-white overflow-x-hidden'>
+				{/* Desktop nav (client component) */}
+				<DesktopNav
+					items={NAV_ITEMS}
+					walkingData={walkingData}
+					badgeImageSrc='/assets/images/BABCP-logo.webp'
+					className='border-yellow-400'
+				/>
+				<div className='border-t-2 border-primary-foreground mt-[1px] w-[120%]' />
+
+				{/* ClientRoot provides background scroll effect, mobile menu, and contexts */}
+				<ClientRoot>
+					{/* Main page content */}
+					<main className='relative w-screen flex-1'>{children}</main>
+					{/* Footer inside body, after content */}
+					<Footer />
+				</ClientRoot>
 			</body>
 		</html>
 	);
 }
 
 import ClientRoot from "./components/layout/navigation/ClientRoot";
+import DesktopNav, {
+	NAV_ITEMS
+} from "./components/layout/navigation/DesktopMenu";
+import Footer from "./components/layout/navigation/Footer";
