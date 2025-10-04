@@ -62,7 +62,7 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 
 	return (
 		<div className='flex flex-col items-center w-full pt-20 px-4 md:px-16'>
-			<AnimatedSectionTitle title='What People Say' className='pl-20' />
+			<AnimatedSectionTitle title='What People Say' className='pl-28' />
 
 			<div
 				id={id}

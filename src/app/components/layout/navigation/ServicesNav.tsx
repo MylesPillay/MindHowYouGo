@@ -11,7 +11,7 @@ type ServicesNavProps = {
 	onKeyDownTabs: (e: React.KeyboardEvent) => void;
 };
 
-const SettingsNav: React.FC<ServicesNavProps> = ({
+const ServicesNav: React.FC<ServicesNavProps> = ({
 	panes,
 	activeId,
 	onSelect,
@@ -66,4 +66,4 @@ const SettingsNav: React.FC<ServicesNavProps> = ({
 	);
 };
 
-export default SettingsNav;
+export default ServicesNav;

@@ -21,7 +21,7 @@ const ServicesTitleClear: React.FC<SectionTitleClearProps> = ({
 						letterSpacing: 1,
 						fontSize: inset ? undefined : "3rem"
 					}}>
-					<span className={`text-primary-secondary font-light`}>
+					<span className={`text-primary-secondary/80 font-light`}>
 						{title}
 					</span>
 				</h3>

@@ -150,7 +150,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 
 	return (
 		<div className='flex flex-col items-center w-full py-20 px-4 md:px-16'>
-			<AnimatedSectionTitle title='Get In Touch' />
+			<AnimatedSectionTitle title='Get In Touch' className='pl-28' />
 			<p
 				id={statusId}
 				role='status'
