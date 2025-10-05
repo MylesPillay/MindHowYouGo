@@ -129,7 +129,6 @@ const HeroSection = () => {
 						</div>
 					</div>
 
-					{/* Copy & CTA */}
 					<div className='flex flex-col w-auto mx-auto justify-around py-48'>
 						<h1
 							id='hero-title'
