@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "../../../../../../database.types";
 import ServicesTitleClear from "@/app/components/layout/headers/Services/ServicesTitleClear";
+import { insertContact } from "../Home/hooks/handleInsertContact";
 
 interface IFormInput {
 	contact_name: string;
@@ -14,19 +15,7 @@ interface IFormInput {
 	contact_message: string;
 }
 
-type Contact = Database["public"]["Tables"]["contacts"]["Row"];
-
 const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
-	// ✅ Browser Supabase client (anon/public)
-	const supabase = useMemo(
-		() =>
-			createClient(
-				process.env.NEXT_PUBLIC_SUPABASE_URL!,
-				process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-			),
-		[]
-	);
-
 	const {
 		register,
 		handleSubmit,
@@ -40,79 +29,17 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 	>(null);
 	const [statusMsg, setStatusMsg] = useState<string>("");
 
-	// ----- Data helpers -----
-	const insertContact = async (
-		formData: IFormInput
-	): Promise<Contact | null> => {
-		const { data, error, status } = await supabase
-			.from("contacts")
-			.insert([
-				{
-					contact_name: formData.contact_name,
-					contact_email: formData.contact_email,
-					contact_phone: formData.contact_phone,
-					contact_message: formData.contact_message
-				}
-			])
-			.select()
-			.single();
-
-		if (error) {
-			console.error(
-				"Error inserting contact:",
-				error.message,
-				"Status:",
-				status
-			);
-			throw error;
-		}
-		return data ?? null;
-	};
-
-	const createCalendarEvent = async (payload: Contact) => {
-		try {
-			const edgeUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/createCalendarEntry`;
-			const response = await fetch(edgeUrl, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`
-				},
-				body: JSON.stringify({
-					type: "INSERT",
-					table: "contacts",
-					record: payload
-				})
-			});
-
-			if (!response.ok)
-				throw new Error(`Edge function failed: ${response.status}`);
-			const data = await response.json();
-			console.log("Calendar event created:", data);
-		} catch (err) {
-			console.error("Error creating calendar event:", err);
-		}
-	};
-
-	// ----- Submit handler -----
 	const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
 		setSubmissionStatus(null);
 		setStatusMsg("");
 		try {
-			const inserted = await insertContact(formData);
+			await insertContact(formData);
 
-			if (inserted) {
-				setSubmissionStatus("success");
-				setStatusMsg(
-					"Thanks! I’ve received your message and will get back to you soon."
-				);
-				reset();
-			} else {
-				setSubmissionStatus("no_data");
-				setStatusMsg(
-					"Submitted, but no data was returned. I’ll double-check on my side."
-				);
-			}
+			setSubmissionStatus("success");
+			setStatusMsg(
+				"Thanks! I've received your message and will get back to you soon."
+			);
+			reset();
 		} catch (err) {
 			setSubmissionStatus("error");
 			setStatusMsg(
@@ -121,26 +48,6 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 		}
 	};
 
-	// ----- Realtime: react to inserts (optional) -----
-	useEffect(() => {
-		const channel = supabase
-			.channel("contacts-inserts")
-			.on(
-				"postgres_changes",
-				{ event: "INSERT", schema: "public", table: "contacts" },
-				(payload) => {
-					// payload.new is the new row
-					createCalendarEvent(payload.new as Contact);
-				}
-			)
-			.subscribe();
-
-		return () => {
-			supabase.removeChannel(channel);
-		};
-	}, [supabase]);
-
-	// ----- IDs for a11y -----
 	const nameId = "contact_name";
 	const phoneId = "contact_phone";
 	const emailId = "contact_email";
