@@ -11,6 +11,23 @@ type HeroData = {
 	cta_button_text: string | null;
 };
 
+function fetchWithTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+	return new Promise<T>((resolve, reject) => {
+		const timer = setTimeout(() => {
+			reject(new Error("Request timed out"));
+		}, ms);
+		promise
+			.then((res) => {
+				clearTimeout(timer);
+				resolve(res);
+			})
+			.catch((err) => {
+				clearTimeout(timer);
+				reject(err);
+			});
+	});
+}
+
 const HeroSection = () => {
 	const [animateGlow, _setAnimateGlow] = useState(true);
 	const [initialHero, setInitialHero] = useState<HeroData | null>(null);
@@ -24,24 +41,46 @@ const HeroSection = () => {
 			return () => clearTimeout(timeout);
 		}
 	}, [loading]);
-	useEffect(() => {
-		const fetchHero = async () => {
-			const supabase = supabaseBrowser;
-			const { data, error } = await supabase
-				.from("content_hero_section")
-				.select("*");
 
-			if (error) {
-				console.error("Hero fetch error:", error);
+	useEffect(() => {
+		let didCancel = false;
+
+		const fetchHero = async (retry = false) => {
+			let didRetry = false;
+			try {
+				const supabase = supabaseBrowser;
+				const result = await fetchWithTimeout(
+					Promise.resolve(
+						supabase.from("content_hero_section").select("*")
+					),
+					7000
+				);
+				const { data, error } = result as { data: any; error: any };
+				if (didCancel) return;
+				if (error) {
+					throw error;
+				}
+				setInitialHero((data?.[0] as HeroData) ?? null);
+			} catch (err) {
+				console.error("Hero fetch error:", err);
+				if (!retry) {
+					didRetry = true;
+					setTimeout(() => fetchHero(true), 1000);
+				}
+				setInitialHero(null);
+			} finally {
+				if (!didRetry) setLoading(false);
 			}
-			setInitialHero((data?.[0] as HeroData) ?? null);
-			setLoading(false);
 		};
+
 		const timeout = setTimeout(() => {
 			fetchHero();
 		}, 300);
 
-		return () => clearTimeout(timeout);
+		return () => {
+			didCancel = true;
+			clearTimeout(timeout);
+		};
 	}, []);
 
 	const companyTitle = useMemo(
