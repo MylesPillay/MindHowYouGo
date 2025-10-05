@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { getSupabaseServer } from "@/utils/api/supabase";
+import { supabaseBrowser } from "@/utils/api/supabase";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
 
 type HeroData = {
@@ -26,7 +26,7 @@ const HeroSection = () => {
 	}, [loading]);
 	useEffect(() => {
 		const fetchHero = async () => {
-			const supabase = getSupabaseServer();
+			const supabase = supabaseBrowser;
 			const { data, error } = await supabase
 				.from("content_hero_section")
 				.select("*");

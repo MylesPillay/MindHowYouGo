@@ -1,22 +1,17 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { google } from "npm:googleapis@latest";
+import { google } from "npm:googleapis@108";
 
-// Entry point for the Edge Function
 serve(async (req: Request) => {
-  // Set CORS headers
   const headers = new Headers({
-    "Access-Control-Allow-Origin": "*", // Allow all origins (or specify your frontend URL, e.g., "http://localhost:3000")
-    "Access-Control-Allow-Methods": "POST, OPTIONS", // Allow POST and OPTIONS requests
-    "Access-Control-Allow-Headers": "Content-Type, Authorization", // Allow these headers
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Content-Type": "application/json",
   });
 
-  // Handle preflight requests (OPTIONS)
-  if (req.method === "OPTIONS") {
-    return new Response(null, { headers });
-  }
+  if (req.method === "OPTIONS") return new Response(null, { headers });
 
   try {
-    // 1. Check if the request method is POST
     if (req.method !== "POST") {
       return new Response(JSON.stringify({ error: "Only POST allowed" }), {
         status: 405,
@@ -24,72 +19,74 @@ serve(async (req: Request) => {
       });
     }
 
-    // 2. Parse the incoming request payload
+    // Expect Supabase DB Webhook payload
     const payload = await req.json();
-    console.log("Edge function payload:", payload);
-
-    // 3. Validate the payload
-    if (payload.type !== "INSERT" || payload.table !== "contacts") {
-      throw new Error("Invalid payload type or table. Expected INSERT on contacts.");
+    if (payload?.type !== "INSERT" || payload?.table !== "contacts" || !payload?.record) {
+      return new Response(JSON.stringify({ error: "Expected INSERT on contacts" }), {
+        status: 400,
+        headers,
+      });
     }
     const contact = payload.record;
 
-    // 4. Read Google service account credentials from environment variables
-    const serviceAccount = JSON.parse(Deno.env.get("GOOGLE_SERVICE_ACCOUNT_JSON")!);
-    console.log("Private Key:", serviceAccount.private_key);
-
-    if (!serviceAccount.client_email || !serviceAccount.private_key) {
-      throw new Error("Missing client_email or private_key in service account JSON");
+    // Load service account (RAW JSON recommended)
+    const raw = Deno.env.get("GOOGLE_SERVICE_ACCOUNT_JSON");
+    if (!raw) throw new Error("Missing GOOGLE_SERVICE_ACCOUNT_JSON");
+    let sa: any;
+    try {
+      sa = JSON.parse(raw);
+    } catch {
+      throw new Error("GOOGLE_SERVICE_ACCOUNT_JSON is not valid JSON");
+    }
+    if (!sa.client_email || !sa.private_key) {
+      throw new Error("Service account JSON missing client_email/private_key");
     }
 
-    // 5. Authenticate with Google Calendar API using JWT
     const auth = new google.auth.JWT({
-      email: serviceAccount.client_email,
-      key: serviceAccount.private_key,
+      email: sa.client_email,
+      key: sa.private_key,
       scopes: ["https://www.googleapis.com/auth/calendar.events"],
     });
-
-    // 6. Initialize the Calendar API
     const calendar = google.calendar({ version: "v3", auth });
 
-    // 7. Build the calendar event
+    // Build event (15 min)
+    const start = new Date();
+    const end = new Date(start.getTime() + 15 * 60 * 1000);
     const event = {
-      summary: `New Contact: ${contact.contact_name}`, // Include the contact's name in the summary
-      description: `
-        Email: ${contact.contact_email}
-        Phone: ${contact.contact_phone}
-        Message: ${contact.contact_message}
-      `, // Include all contact details in the description
-      start: {
-        dateTime: new Date().toISOString(), // Start now
-        timeZone: "UTC", // Use UTC time zone (or update to a specific time zone if needed)
-      },
-      end: {
-        dateTime: new Date(Date.now() + 60 * 60 * 1000).toISOString(), // 1 hour later
-        timeZone: "UTC", // Use UTC time zone (or update to a specific time zone if needed)
-      },
-      reminders: { useDefault: true }, // Use default reminders
+      summary: `New Contact: ${contact.contact_name ?? "Unknown"}`,
+      description:
+        `Email: ${contact.contact_email ?? "-"}\n` +
+        `Phone: ${contact.contact_phone ?? "-"}\n` +
+        `Message: ${contact.contact_message ?? "-"}`,
+      start: { dateTime: start.toISOString(), timeZone: "UTC" },
+      end:   { dateTime: end.toISOString(),   timeZone: "UTC" },
+      reminders: { useDefault: true },
     };
 
-    // 8. Insert the event into the calendar
-    const calendarId = "bfb5595179ae458d42a50a2ac2ff8d5917c544d06994ae86b66256efb6f7f5fc@group.calendar.google.com";
-    const response = await calendar.events.insert({
-      calendarId,
-      resource: event,
+    const calendarId = Deno.env.get("GOOGLE_CALENDAR_ID") ?? "primary";
+
+    // Insert event; surface Google errors
+    let resp;
+    try {
+      resp = await calendar.events.insert({ calendarId, requestBody: event });
+    } catch (err: any) {
+      const gerr = err?.response?.data || err?.message || String(err);
+      console.error("Google API error:", gerr);
+      return new Response(JSON.stringify({ success: false, step: "events.insert", error: gerr }), {
+        status: 400,
+        headers,
+      });
+    }
+
+    return new Response(JSON.stringify({ success: true, event: resp.data }), {
+      status: 200,
+      headers,
     });
-
-    console.log("Calendar event created:", response.data.htmlLink);
-
-    // 9. Return a success response with CORS headers
-    return new Response(
-      JSON.stringify({ success: true, event: response.data }),
-      { status: 200, headers }
-    );
-  } catch (error: unknown) {
-    console.error("Error in createCalendarEntry function:", error);
-    return new Response(
-      JSON.stringify({ success: false, error: (error as Error).message }),
-      { status: 400, headers }
-    );
+  } catch (e: any) {
+    console.error("Handler error:", e?.message ?? String(e));
+    return new Response(JSON.stringify({ success: false, error: e?.message ?? String(e) }), {
+      status: 400,
+      headers,
+    });
   }
 });

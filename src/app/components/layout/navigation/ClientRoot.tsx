@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
-import { getSupabaseServer } from "@/utils/api/supabase";
+import { supabaseBrowser } from "@/utils/api/supabase";
 import {
 	attachScrollColor,
 	finalColorStr,
@@ -15,7 +15,7 @@ export default function ClientRoot({
 }: {
 	children: React.ReactNode;
 }) {
-	const supabase = getSupabaseServer();
+	const supabase = supabaseBrowser;
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [bgColor, setBgColor] = useState(initialColorStr);
 	useEffect(() => {

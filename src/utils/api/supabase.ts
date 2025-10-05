@@ -1,9 +1,20 @@
-import { createClient } from "@supabase/supabase-js";
-import type { Database } from "../../../database.types";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-export function getSupabaseServer() {
-	const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-	const key =
-		process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-	return createClient<Database>(url, key, { auth: { persistSession: false } });
-}
+const globalForSupabase = globalThis as unknown as { _sb?: SupabaseClient }
+
+export const supabaseBrowser =
+  globalForSupabase._sb ??
+  createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      auth: {
+        storageKey: 'ttk-public-auth',
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: false,
+      },
+    }
+  )
+
+if (!globalForSupabase._sb) globalForSupabase._sb = supabaseBrowser

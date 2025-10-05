@@ -4,7 +4,7 @@ import Image from "next/image";
 import TextBox from "../../layout/containers/TextBox";
 import SectionTitleClear from "../../layout/headers/SectionTitleClear";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
-import { getSupabaseServer } from "@/utils/api/supabase";
+import { supabaseBrowser } from "@/utils/api/supabase";
 
 interface ContentDataType {
 	section_title: string;
@@ -18,7 +18,7 @@ interface ContentDataType {
 const AboutMe = ({ id }: { id: string }) => {
 	const [content, setContent] = useState<ContentDataType | null>(null);
 	const [loading, setLoading] = useState(true);
-	const [fadeIn, setFadeIn] = useState(false);
+	const [_fadeIn, setFadeIn] = useState(false);
 
 	React.useEffect(() => {
 		if (!loading) {
@@ -29,7 +29,7 @@ const AboutMe = ({ id }: { id: string }) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = getSupabaseServer();
+			const supabase = supabaseBrowser;
 			const { data, error } = await supabase
 				.from("content_about_me")
 				.select("*");
@@ -84,8 +84,9 @@ const AboutMe = ({ id }: { id: string }) => {
 					<div className='w-80 h-80 rounded-full overflow-hidden relative flex items-center align-self-start justify-center mt-16 -ml-16'>
 						<Image
 							src='/assets/images/Kiran.png'
-							alt='companyLogo'
+							alt='Photo of me: Kiran Sharma'
 							fill
+							sizes='400px'
 							className='object-fill scale-125 rounded-full'
 						/>
 					</div>
