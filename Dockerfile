@@ -22,7 +22,7 @@ COPY . .
 # Public envs needed at build time so Next.js can inline them in the client bundle
 # (Safe to bake; DO NOT bake secrets like service role keys)
 ARG NEXT_PUBLIC_SUPABASE_URL="https://ngtfjhkkqhatjugocvhh.supabase.co"
-ARG NEXT_PUBLIC_SUPABASE_ANON_KEY="sb_publishable_REPLACE_ME"
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY="sb_publishable_5CMunJSFsgfmOAY84XnQng_AoRiM0mP"
 ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
 ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
 
