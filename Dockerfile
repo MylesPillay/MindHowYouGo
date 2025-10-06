@@ -1,4 +1,5 @@
 # syntax=docker.io/docker/dockerfile:1
+
 FROM node:20-alpine AS base
 
 # ---------- deps ----------
@@ -18,11 +19,12 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# If you need public vars at build time (SSG/ISR embeds):
-ARG NEXT_PUBLIC_SUPABASE_URL
-ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
-ENV NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
-ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+# Public envs needed at build time so Next.js can inline them in the client bundle
+# (Safe to bake; DO NOT bake secrets like service role keys)
+ARG NEXT_PUBLIC_SUPABASE_URL="https://ngtfjhkkqhatjugocvhh.supabase.co"
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY="sb_publishable_REPLACE_ME"
+ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN \
@@ -36,12 +38,12 @@ FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-# DO NOT set PORT here; let the platform inject it (e.g., $PORT)
+# Do not set PORT here; platform (Code Capsules) injects it
 
-# Create unprivileged user
+# Non-root user
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 
-# Copy build artifacts (ensure ownership for non-root user)
+# Copy build artifacts with correct ownership
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
