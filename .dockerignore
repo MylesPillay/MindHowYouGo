@@ -1,14 +1,27 @@
-node_modules;
-npm - debug.log;
-Dockerfile.dockerignore.git.gitignore.env;
-.git
+# Node/Next build artifacts
 node_modules
 .next
+out
 dist
 coverage
+
+# VCS / editor noise
+.git
+.gitignore
+.DS_Store
+.vscode
+.turbo
+
+# Logs
 *.log
+npm-debug.log*
+yarn-error.log*
+
+# Env & config you don’t want in the build context
 .env
 .env.*
-Dockerfile
-docker-compose.yml
+.npmrc
+
+# Optional: these don't need to be sent to the daemon
+docker-compose*.yml
 compose.yaml

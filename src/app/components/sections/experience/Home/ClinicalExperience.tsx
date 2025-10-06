@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { supabaseBrowser } from "@/utils/api/supabase";
+import { getSupabaseBrowser } from "@/utils/api/supabase";
 import { LoadingBlock } from "@/app/components/layout/loading/LoadingBlock";
 
 export interface ClinicalExperienceRow {
@@ -39,7 +39,7 @@ const ClinicalExperience = () => {
 
 	React.useEffect(() => {
 		const fetchContent = async () => {
-			const supabase = supabaseBrowser;
+			const supabase = getSupabaseBrowser();
 			const { data: content, error } = await supabase
 				.from("content_clinic")
 				.select("*");

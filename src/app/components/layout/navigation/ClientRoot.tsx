@@ -1,7 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
-import { supabaseBrowser } from "@/utils/api/supabase";
+import { getSupabaseBrowser } from "@/utils/api/supabase";
 import {
 	attachScrollColor,
 	finalColorStr,
@@ -15,7 +15,6 @@ export default function ClientRoot({
 }: {
 	children: React.ReactNode;
 }) {
-	const supabase = supabaseBrowser;
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [bgColor, setBgColor] = useState(initialColorStr);
 	useEffect(() => {
@@ -28,6 +27,14 @@ export default function ClientRoot({
 		});
 	}, [setBgColor]);
 
+	const supabase = useMemo(() => {
+		if (typeof window === "undefined") return null;
+		return getSupabaseBrowser();
+	}, []);
+
+	if (!supabase)
+		return <main className='relative w-screen flex-1'>{children}</main>;
+
 	return (
 		<div
 			style={{
@@ -36,15 +43,6 @@ export default function ClientRoot({
 			}}
 			className='flex relative flex-col h-full w-full text-white overflow-x-hidden sticky-top-0!'>
 			<SessionContextProvider supabaseClient={supabase}>
-				{/* Nav */}
-				{/* <DesktopNav
-						items={NAV_ITEMS}
-						walkingData={walkingData}
-						badgeImageSrc='/assets/images/BABCP-logo.webp'
-						className='border-yellow-400'
-					/>
-					<div className='border-t-2 border-primary-foreground mt-[1px] w-[120%]' />
-					*/}
 				<MobileMenu
 					isOpen={mobileMenuOpen}
 					setOpen={setMobileMenuOpen}

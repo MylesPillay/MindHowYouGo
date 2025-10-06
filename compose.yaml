@@ -1,7 +1,15 @@
 services:
     web:
-        build: .
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+                NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        environment:
+            NODE_ENV: production
+            # runtime secrets (no NEXT_PUBLIC_)
+            SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+            GOOGLE_CALENDAR_SECRET_ADDRESS: ${GOOGLE_CALENDAR_SECRET_ADDRESS}
         ports:
-            - "8000:5000"
-    redis:
-        image: "redis:alpine"
+            - "3000:3000"

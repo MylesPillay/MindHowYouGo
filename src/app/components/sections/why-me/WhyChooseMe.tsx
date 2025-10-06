@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import TextBox from "../../layout/containers/TextBox";
 import Image from "next/image";
 import SectionTitleClear from "../../layout/headers/SectionTitleClear";
-import { supabaseBrowser } from "@/utils/api/supabase";
+import { getSupabaseBrowser } from "@/utils/api/supabase";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
 
 interface ContentDataType {
@@ -36,7 +36,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = supabaseBrowser;
+			const supabase = getSupabaseBrowser();
 			const { data, error } = await supabase
 				.from("content_why_me")
 				.select("*");

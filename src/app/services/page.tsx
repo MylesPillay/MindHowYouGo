@@ -1,4 +1,3 @@
-// src/app/services/page.tsx
 import type { Metadata } from "next";
 import ServicesPageClient from "./client/ServicesPageClient";
 

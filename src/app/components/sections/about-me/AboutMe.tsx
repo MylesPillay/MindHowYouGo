@@ -4,7 +4,7 @@ import Image from "next/image";
 import TextBox from "../../layout/containers/TextBox";
 import SectionTitleClear from "../../layout/headers/SectionTitleClear";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
-import { supabaseBrowser } from "@/utils/api/supabase";
+import { getSupabaseBrowser } from "@/utils/api/supabase";
 
 interface ContentDataType {
 	section_title: string;
@@ -29,7 +29,7 @@ const AboutMe = ({ id }: { id: string }) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = supabaseBrowser;
+			const supabase = getSupabaseBrowser();
 			const { data, error } = await supabase
 				.from("content_about_me")
 				.select("*");

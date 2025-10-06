@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import TextBox from "../../../layout/containers/TextBox";
 import AnimatedSectionTitle from "@/app/components/layout/headers/AnimatedTitle";
 import Image from "next/image";
-import { supabaseBrowser } from "@/utils/api/supabase";
+import { getSupabaseBrowser } from "@/utils/api/supabase";
 import { LoadingBlock } from "@/app/components/layout/loading/LoadingBlock";
 
 interface ContentDataType {
@@ -51,7 +51,7 @@ const CBTExplained = ({ abridged = false }: CBTExplainedProps) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = supabaseBrowser;
+			const supabase = getSupabaseBrowser();
 			const { data, error } = await supabase
 				.from("content_cbt_text_blocks")
 				.select("*");

@@ -1,8 +1,6 @@
-// src/app/privacy/page.tsx
 "use client";
-
 import { LoadingBlock } from "../components/layout/loading/LoadingBlock";
-import { supabaseBrowser } from "@/utils/api/supabase";
+import { getSupabaseBrowser } from "@/utils/api/supabase";
 import React, { useEffect, useState } from "react";
 import {
 	PrivacyContent,
@@ -16,7 +14,7 @@ export default function PrivacyPage() {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = supabaseBrowser;
+			const supabase = getSupabaseBrowser();
 			const { data, error } = await supabase
 				.from("content_privacy_notice")
 				.select("*");
