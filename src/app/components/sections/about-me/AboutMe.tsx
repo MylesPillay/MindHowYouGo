@@ -35,7 +35,7 @@ const AboutMe = ({ id }: { id: string }) => {
 				.select("*");
 
 			if (error) {
-				console.error("Why Me data fetch error:", error);
+				console.error("Why Choose Me data fetch error:", error);
 			}
 			setContent((data?.[0] as ContentDataType) ?? null);
 			setLoading(false);
