@@ -192,7 +192,7 @@ const ClinicalExperience = () => {
 								{panelItems.map((item, idx) => (
 									<li
 										key={`${activeCategory?.category}-${idx}`}
-										className='break-inside-avoid flex items-start gap-4 text-xl font-light'>
+										className='break-inside-avoid flex items-start gap-4 text-xl font-light text-primary-secondary'>
 										<FaCheckCircle
 											className='text-primary mt-1 shrink-0'
 											aria-hidden='true'

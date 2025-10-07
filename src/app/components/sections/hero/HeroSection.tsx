@@ -109,10 +109,10 @@ const HeroSection = () => {
 					<div
 						className='flex justify-end w-[40vw] h-auto px-10 xl:mt-[8vw] lg:mt-[6vw]'
 						aria-hidden='true'>
-						<div className='relative w-auto h-auto flex flex-grow overflow-hidden border-4 border-primary-secondary object-cover border-opacity-60 rounded-t-full rounded-b-0 max-h-[550px] max-w-[460px] xl:min-h-[550px] xl:min-w-[460px] lg:min-h-[460px] lg:min-w-[360px] p-1'>
-							<div className='overflow-hidden border-4 w-auto h-auto flex flex-grow border-primary-secondary border-opacity-30 rounded-t-full rounded-b-0 max-h-[535px] max-w-[445px] xl:min-h-[535px] xl:min-w-[445px] lg:min-h-[445px] lg:min-w-[355px]'>
+						<div className='relative w-auto h-auto flex flex-grow overflow-hidden border-4 border-primary-secondary object-cover border-opacity-60 rounded-t-full rounded-b-0 max-h-[450px] max-w-[360px] xl:min-h-[450px] xl:min-w-[360px] lg:min-h-[360px] lg:min-w-[260px] p-1'>
+							<div className='overflow-hidden border-4 w-auto h-auto flex flex-grow border-primary-secondary border-opacity-30 rounded-t-full rounded-b-0 max-h-[435px] max-w-[345px] xl:min-h-[435px] xl:min-w-[345px] lg:min-h-[345px] lg:min-w-[255px]'>
 								<div
-									className={`relative max-h-[546px] w-auto h-auto flex flex-grow max-w-[435px] bg-gradient-to-r from-teal-200 to-yellow-200 transition-opacity duration-10000 ease-in-out ${
+									className={`relative max-h-[446px] w-auto h-auto flex flex-grow max-w-[335px] bg-gradient-to-r from-teal-200 to-yellow-200 transition-opacity duration-10000 ease-in-out ${
 										animateGlow
 											? "opacity-40 animate-pulse-slow"
 											: "opacity-100"

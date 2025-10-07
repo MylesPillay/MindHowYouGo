@@ -1,8 +1,13 @@
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind base;
 
-/* 2) Your base layer custom properties */
+html,
+body,
+#root {
+	height: 100vh;
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 97%;
@@ -25,26 +30,13 @@
 		--background: 215 28% 17%;
 		--foreground: 0 0% 97%;
 	}
-
-	* {
-		@apply border-border;
-	}
-	body {
-		@apply bg-background text-foreground;
-	}
-
-	html,
-	body,
-	#root {
-		height: 100vh;
-	}
 }
 
-/* 3) Utilities */
 @layer utilities {
 	.scrollbar-hidden::-webkit-scrollbar {
 		display: none;
 	}
+
 	.scrollbar-hidden {
 		scrollbar-width: none;
 		-ms-overflow-style: none;

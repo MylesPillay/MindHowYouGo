@@ -56,7 +56,7 @@ const Subheading = ({
 );
 
 const P = ({ children }: { children: React.ReactNode }) => (
-	<p className='mt-6 text-primary-secondary text-sm font-light text-left '>
+	<p className='mt-6 text-primary-secondary text-md font-medium text-left ml-8'>
 		{children}
 	</p>
 );
@@ -72,7 +72,7 @@ const ListBlock = ({
 	const base = ordered ? "list-decimal" : "list-disc";
 	return (
 		<Wrapper
-			className={`mt-6 ${base} text-primary-secondary text-md font-light space-y-2 pl-6`}>
+			className={`mt-6 ${base} text-primary-secondary text-lg font-light space-y-2 pl-6`}>
 			{items.map((it, i) => (
 				<li key={i}>{it}</li>
 			))}
@@ -95,7 +95,7 @@ export const PrivacyNotice: React.FC<Props> = ({ content, className }) => {
 		<section
 			className={[
 				"flex flex-col w-[75%] justify-start",
-				"pt-20 pb-16",
+				"pt-20 pb-16 ml-48",
 				"px-4 sm:px-6 lg:px-8", // responsive page padding
 				className ?? ""
 			].join(" ")}>

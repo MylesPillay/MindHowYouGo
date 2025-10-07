@@ -1,70 +1,79 @@
-// tailwind.config.js
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
-  darkMode: ["class"],
-  content: [
-    "./src/app/**/*.{ts,tsx}",
-    "./src/components/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "./pages/**/*.{ts,tsx}",
-  ],
-  theme: {
-    extend: {
-      animation: { "pulse-slow": "pulse 6s infinite" },
-
-      // 🔑 Use CSS variables so colors are ready on first paint (and theme-safe)
-      colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        backgroundSunny: "hsl(39, 89%, 86%)",
-        backgroundSunnyDark: "hsla(42, 97%, 63%, 0.6)",
-        accent: {
-          DEFAULT: "hsl(145, 63%, 42%)",
-          foreground: "hsl(0, 0%, 97%)",
-        },
-      },
-      spacing: { 80: "20rem" },
-      borderRadius: { lg: "0.5rem", md: "0.375rem", sm: "0.25rem" },
-    },
-  },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/line-clamp"),
-    plugin(({ addComponents }: { addComponents: (components: Record<string, any>) => void }) => {
-      addComponents({
-        ".input-default": {
-          backgroundColor: "hsl(var(--input))",
-          borderWidth: "1px",
-          borderColor: "hsl(var(--border))",
-          borderRadius: "0.5rem",
-        },
-      });
-    }),
-  ],
+	darkMode: ["class"],
+	content: [
+		"./pages/**/*.{ts,tsx}",
+		"./components/**/*.{ts,tsx}",
+		"./app/**/*.{ts,tsx}",
+		"./src/**/*.{ts,tsx}"
+	],
+	theme: {
+		extend: {
+			animation: {
+				"pulse-slow": "pulse 6s infinite",
+		},
+			colors: {
+				background: "hsl(0, 0%, 97%)", // Light gray for better contrast
+				foreground: "hsl(215, 28%, 17%)", // Dark navy for text
+				primary: {
+					DEFAULT: "hsl(205, 72%, 41%)", // Blue
+					foreground: "hsl(180, 70%, 34%)",
+					secondary: "#10587c", // Light text on primary
+					headerMidPoint: "#2b7ab7"
+				},
+				secondary: {
+					DEFAULT: "hsl(200, 30%, 46%)", // Muted blue-gray
+					foreground: "hsl(0, 0%, 97%)" // Light text on secondary
+				},
+				muted: {
+					DEFAULT: "hsl(200, 20%, 88%)", // Very light gray
+					foreground: "hsl(215, 20%, 27%)" // Darker gray text
+				},
+				destructive: {
+					DEFAULT: "hsl(0, 70%, 50%)", // Bright red
+					foreground: "hsl(0, 0%, 97%)" // Light text on red
+				},
+				accent: {
+					DEFAULT: "hsl(145, 63%, 42%)", // Green for accents
+					foreground: "hsl(0, 0%, 97%)" // Light text on accent
+				},
+				border: "hsl(215, 28%, 89%)",
+				input: "hsl(215, 28%, 96%)",
+				card: {
+					DEFAULT: "hsl(0, 0%, 100%)",
+					foreground: "hsl(215, 28%, 17%)"
+				},
+					backgroundSunny: {
+					DEFAULT: "hsl(39, 89%, 86%)", // sun light yellow
+				},
+				backgroundSunnyDark: {
+					DEFAULT: "hsla(42, 97%, 63%, 0.6)", // sun dark yellow
+				},
+				spacing: {
+					80: "20rem"
+				},
+			},
+			borderRadius: {
+				lg: "0.5rem",
+				md: "0.375rem",
+				sm: "0.25rem"
+			}
+		}
+	},
+	plugins: [
+		require("tailwindcss-animate"),
+		require("@tailwindcss/typography"),
+		require("@tailwindcss/line-clamp"),
+		plugin(function ({ addComponents }: any) {
+			addComponents({
+				".input-default": {
+					backgroundColor: "hsl(215, 28%, 96%)",
+					borderWidth: "1px",
+					borderColor: "hsl(215, 28%, 89%)",
+					borderRadius: "0.5rem"
+				}
+			});
+		})
+	]
 };
