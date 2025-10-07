@@ -19,7 +19,7 @@ const ServicesTitleClear: React.FC<SectionTitleClearProps> = ({
 				<h3
 					style={{
 						letterSpacing: 1,
-						fontSize: inset ? undefined : "3rem"
+						fontSize: inset ? undefined : "2.6rem"
 					}}>
 					<span className={`text-primary-secondary/80 font-light`}>
 						{title}

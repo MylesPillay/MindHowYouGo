@@ -155,39 +155,39 @@ const CBTExplained = ({ abridged = false }: CBTExplainedProps) => {
 							abridged ? "hidden" : "flex"
 						} justify-center w-full text-center mx-auto min-w-[68vw] my-16`}
 						variant='dark'>
-						<h3 className='flex w-full justify-center text-primary-foreground lg:text-5xl my-8 font-light'>
+						<h3 className='flex w-full justify-center text-primary-foreground lg:text-4xl my-8 font-light'>
 							{cbtExplainedContent.topBox.line1}
 						</h3>
-						<h3 className='text-center w-full text-primary text-3xl font-medium self-center pt-2'>
+						<h3 className='text-center w-full text-primary text-2xl font-medium self-center pt-2'>
 							{cbtExplainedContent.topBox.line2}
 						</h3>
-						<h3 className='flex text-center w-full my-10 text-primary-secondary text-2xl font-light px-16'>
+						<h3 className='flex text-center w-full my-10 text-primary-secondary text-xl font-light px-16'>
 							{cbtExplainedContent.therapyWithMe[1]}
 						</h3>
 					</TextBox>
 					{abridged ? (
 						<>
-							<h3 className='flex my-8 p-2 text-primary-secondary text-2xl font-light self-center w-[60%] text-center'>
+							<h3 className='flex my-8 p-2 text-primary-secondary text-xl font-light self-center w-[60%] text-center'>
 								{cbtExplainedContent.therapyWithMe[2]}
 							</h3>
-							<h3 className='flex mb-8 p-2 text-primary-secondary text-2xl font-light self-center w-[60%] text-center'>
+							<h3 className='flex mb-8 p-2 text-primary-secondary text-xl font-light self-center w-[60%] text-center'>
 								{cbtExplainedContent.therapyWithMe[3]}
 							</h3>
-							<h3 className='flex mb-8 p-2 text-primary-secondary text-2xl font-light self-center w-[60%] text-center'>
+							<h3 className='flex mb-8 p-2 text-primary-secondary text-xl font-light self-center w-[60%] text-center'>
 								{cbtExplainedContent.therapyWithMe[4]}
 							</h3>
 						</>
 					) : (
 						<>
 							<div className='flex flex-row justify-between w-[60%] mx-auto space-x-8	items-baseline pt-16'>
-								<h3 className='flex-1 mt-4 p-2 text-primary-secondary text-2xl w-[55%] font-light text-center'>
+								<h3 className='flex-1 mt-4 p-2 text-primary-secondary text-xl w-[55%] font-light text-center'>
 									{cbtExplainedContent.therapyWithMe[2]}
 								</h3>
-								<h3 className='w-[45%] mt-4 p-2 text-primary-secondary text-2xl font-light text-center'>
+								<h3 className='w-[45%] mt-4 p-2 text-primary-secondary text-xl font-light text-center'>
 									{cbtExplainedContent.therapyWithMe[3]}
 								</h3>
 							</div>
-							<h3 className='flex my-20 p-2 text-primary-secondary text-2xl font-light self-center w-[70%] text-center'>
+							<h3 className='flex my-20 p-2 text-primary-secondary text-xl font-light self-center w-[70%] text-center'>
 								{cbtExplainedContent.therapyWithMe[4]}
 							</h3>
 						</>
@@ -198,11 +198,11 @@ const CBTExplained = ({ abridged = false }: CBTExplainedProps) => {
 								title='Walk & Talk'
 								className='w-screen -ml-48 -mt-5'
 							/>
-							<h3 className='flex text-center my-8 p-2 text-primary-secondary text-2xl font-light self-center'>
+							<h3 className='flex text-center my-8 p-2 text-primary-secondary text-xl font-light self-center'>
 								{cbtExplainedContent.walkAndTalk[1]}
 							</h3>
 							<div className='w-[108%] -ml-8 -mb-4 justify-end bg-zinc-100 border-t-[1.5px] border-zinc-700'>
-								<h3 className='text-primary-secondary font-light text-2xl p-8 py-3 justify-center mx-auto max-w-[90%]'>
+								<h3 className='text-primary-secondary font-light text-xl p-8 py-3 justify-center mx-auto max-w-[90%]'>
 									{cbtExplainedContent.walkAndTalk[2]}
 								</h3>
 							</div>
@@ -215,15 +215,15 @@ const CBTExplained = ({ abridged = false }: CBTExplainedProps) => {
 						<Image
 							src='/assets/images/cabotTower.png'
 							alt='Company logo'
-							width={770}
-							height={990}
+							width={600}
+							height={720}
 						/>
 					</div>
 					<TextBox
 						className={`${
 							abridged ? "hidden" : "flex"
 						} justify-end w-full text-center mx-auto mb-20`}>
-						<h3 className='text-center w-full text-primary-secondary text-2xl font-light self-center p-4'>
+						<h3 className='text-center w-full text-primary-secondary text-xl font-light self-center p-4'>
 							{cbtExplainedContent.walkAndTalk[3]}
 						</h3>
 					</TextBox>

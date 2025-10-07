@@ -42,8 +42,8 @@ const ServicesNav: React.FC<ServicesNavProps> = ({
 								"px-3 md:px-4 py-1.5 md:py-2",
 								// Typography
 								isActive
-									? "text-white font-semibold text-lg tracking-wide drop-shadow"
-									: "text-white/85 font-normal text-lg tracking-wide hover:text-white"
+									? "text-white font-semibold text-md tracking-wide drop-shadow pointer-events-none"
+									: "text-white/85 font-normal text-md tracking-wide hover:text-white"
 							].join(" ")}>
 							<span className='whitespace-nowrap'>{p.title}</span>
 

@@ -1,10 +1,7 @@
 "use client";
-
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../../../layout/buttons/Button";
-import { useEffect, useMemo, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
-import type { Database } from "../../../../../../database.types";
+import { useState } from "react";
 import ServicesTitleClear from "@/app/components/layout/headers/Services/ServicesTitleClear";
 import { insertContact } from "../Home/hooks/handleInsertContact";
 
@@ -82,7 +79,7 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 					<div className='flex flex-col w-full'>
 						<label
 							htmlFor={nameId}
-							className='text-2xl font-normal text-primary-foreground my-4'>
+							className='text-xl font-normal text-primary-foreground my-4'>
 							First and Last Name
 						</label>
 						<input
@@ -98,7 +95,7 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 									? `${nameId}-error`
 									: undefined
 							}
-							className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-lg'
+							className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-md'
 							placeholder='Enter your name'
 							autoComplete='name'
 							inputMode='text'
@@ -116,7 +113,7 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 					<div className='flex flex-col w-full mt-6 md:mt-0'>
 						<label
 							htmlFor={phoneId}
-							className='text-2xl font-normal text-primary-foreground my-4'>
+							className='text-xl font-normal text-primary-foreground my-4'>
 							Phone Number
 						</label>
 						<input
@@ -136,7 +133,7 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 									? `${phoneId}-error`
 									: undefined
 							}
-							className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-lg'
+							className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-md'
 							placeholder='Enter your phone number'
 							autoComplete='tel'
 							inputMode='tel'
@@ -155,7 +152,7 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 				<div className='flex flex-col w-full mb-6'>
 					<label
 						htmlFor={emailId}
-						className='text-2xl font-normal text-primary-foreground my-4'>
+						className='text-xl font-normal text-primary-foreground my-4'>
 						Email Address
 					</label>
 					<input
@@ -175,7 +172,7 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 								? `${emailId}-error`
 								: undefined
 						}
-						className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-lg'
+						className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-md text-primary-secondary placeholder-muted-foreground text-lg'
 						placeholder='Enter your email address'
 						autoComplete='email'
 						inputMode='email'
@@ -193,7 +190,7 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 				<div className='flex flex-col w-full mb-2'>
 					<label
 						htmlFor={msgId}
-						className='text-2xl font-normal text-primary-foreground my-4'>
+						className='text-xl font-normal text-primary-foreground my-4'>
 						How can I help?
 					</label>
 					<textarea
@@ -208,7 +205,7 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 								? `${msgId}-error`
 								: undefined
 						}
-						className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground min-h-[150px] text-lg'
+						className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground min-h-[150px] text-md'
 						placeholder='Please describe your reason for contacting us'
 					/>
 					{errors.contact_message && (
@@ -221,7 +218,7 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 				</div>
 
 				{/* Submit */}
-				<div className='flex w-full h-full justify-center  mt-16 items-center text-lg'>
+				<div className='flex w-full h-full justify-center  mt-16 items-center text-md'>
 					<Button
 						variant='default'
 						type='submit'
@@ -239,7 +236,7 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 							setSubmissionStatus(null);
 							setStatusMsg("");
 						}}
-						className='self-end text-white text-center text-lg p-4 border-primary-foreground/50 bg-primary rounded-full border-4 w-auto'
+						className='self-end text-white text-center text-md p-4 mt-6 border-primary-foreground/50 bg-primary rounded-full border-4 w-auto'
 						aria-label='Dismiss success message'>
 						Form submitted successfully!
 					</button>

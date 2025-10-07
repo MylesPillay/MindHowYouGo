@@ -18,17 +18,17 @@ export default function Logo({ items, className = "" }: Props) {
 			<Link
 				href='/'
 				className='font-medium text-white-foreground hover:text-white text-center w-auto ml-6 pb-2'
-				style={{ letterSpacing: -1, fontSize: "2rem" }}
+				style={{ letterSpacing: -1, fontSize: "1.6rem" }}
 				aria-label='Go to homepage'>
 				<span className='text-white'>Mind</span>
 				<span
 					className='mx-1 text-white text-opacity-70'
-					style={{ letterSpacing: -1.5, fontSize: "1.5rem" }}>
+					style={{ letterSpacing: -1.5, fontSize: "1.3rem" }}>
 					How You
 				</span>
 				<span
 					className='mr-4'
-					style={{ letterSpacing: -1.5, fontSize: "2rem" }}>
+					style={{ letterSpacing: -1.5, fontSize: "1.6rem" }}>
 					Go
 				</span>
 			</Link>
@@ -41,7 +41,7 @@ export default function Logo({ items, className = "" }: Props) {
 					<Link
 						key={item.href}
 						href={item.href}
-						className='md:text-lg text-md font-medium transition-colors'>
+						className='md:text-lg text-sm font-medium transition-colors'>
 						<div className='p-4 hover:text-opacity-60 text-white font-semibold'>
 							{item.label}
 						</div>

@@ -66,7 +66,7 @@ const AnimatedSectionTitle: React.FC<AnimatedSectionTitleProps> = ({
 				].join(" ")}
 				style={{
 					letterSpacing: 1,
-					fontSize: inset ? undefined : "3rem"
+					fontSize: inset ? undefined : "2.6rem"
 				}}>
 				<span className={`text-white ${inset ? "" : "ml-[12vw]"}`}>
 					{title}

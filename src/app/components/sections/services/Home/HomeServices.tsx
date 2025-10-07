@@ -26,7 +26,7 @@ const ServicesSection = ({ contactSectionId = "contact" }: Props) => {
 			</h2>
 
 			<div className='flex flex-col w-full gap-y-8'>
-				<p className='text-center w-[65%] text-primary-secondary text-2xl font-light self-center'>
+				<p className='text-center w-[65%] text-primary-secondary text-xl font-light self-center'>
 					<span className='font-semibold'>
 						Initial 20 min no-obligation introduction call
 					</span>{" "}
@@ -36,7 +36,7 @@ const ServicesSection = ({ contactSectionId = "contact" }: Props) => {
 					right for you.
 				</p>
 
-				<p className='text-center w-[65%] text-primary-secondary text-2xl font-light self-center'>
+				<p className='text-center w-[65%] text-primary-secondary text-xl font-light self-center'>
 					<span className='font-semibold'>
 						1:1 CBT sessions (online)
 					</span>{" "}
@@ -50,7 +50,7 @@ const ServicesSection = ({ contactSectionId = "contact" }: Props) => {
 					to you.
 				</p>
 
-				<p className='text-center w-[65%] text-primary-secondary text-2xl font-light self-center'>
+				<p className='text-center w-[65%] text-primary-secondary text-xl font-light self-center'>
 					<span className='font-semibold'>Walk and Talk therapy</span>{" "}
 					– There is a growing body of evidence around the therapeutic
 					effectiveness of “walk and talk” therapy.
@@ -68,7 +68,7 @@ const ServicesSection = ({ contactSectionId = "contact" }: Props) => {
 					.
 				</p>
 
-				<p className='text-center w-[65%] text-primary-secondary text-2xl font-light self-center'>
+				<p className='text-center w-[65%] text-primary-secondary text-xl font-light self-center'>
 					For some people, the idea of sitting down for a traditional
 					therapy session is just not your “cup of tea”. A lot of our
 					lives are now online based, so walk and talk therapy is a
@@ -76,7 +76,7 @@ const ServicesSection = ({ contactSectionId = "contact" }: Props) => {
 					enhance the therapeutic process.
 				</p>
 
-				<p className='text-center w-[65%] text-primary-secondary text-2xl font-light self-center'>
+				<p className='text-center w-[65%] text-primary-secondary text-xl font-light self-center'>
 					We would have a{" "}
 					<span className='font-semibold text-primary'>
 						set-up session
@@ -88,7 +88,7 @@ const ServicesSection = ({ contactSectionId = "contact" }: Props) => {
 				</p>
 
 				<TextBox className='justify-center w-full text-center mx-auto mt-16'>
-					<p className='text-center w-full text-primary-secondary text-2xl font-light self-center'>
+					<p className='text-center w-full text-primary-secondary text-xl font-light self-center'>
 						If you’re unsure about which service might be right for
 						you, that’s okay — just start with a conversation.{" "}
 						<button
