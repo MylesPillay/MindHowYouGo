@@ -73,7 +73,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 					<div className='flex flex-col w-full md:w-1/2'>
 						<label
 							htmlFor={nameId}
-							className='text-2xl font-normal text-primary-foreground my-4'>
+							className='text-xl font-normal text-primary-foreground my-4'>
 							First and Last Name
 						</label>
 						<input
@@ -89,7 +89,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 									? `${nameId}-error`
 									: undefined
 							}
-							className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-lg'
+							className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-md'
 							placeholder='Enter your name'
 							autoComplete='name'
 							inputMode='text'
@@ -107,7 +107,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 					<div className='flex flex-col w-full md:w-1/2 mt-6 md:mt-0'>
 						<label
 							htmlFor={phoneId}
-							className='text-2xl font-normal text-primary-foreground my-4'>
+							className='text-xl font-normal text-primary-foreground my-4'>
 							Phone Number
 						</label>
 						<input
@@ -127,7 +127,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 									? `${phoneId}-error`
 									: undefined
 							}
-							className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-lg'
+							className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-md'
 							placeholder='Enter your phone number'
 							autoComplete='tel'
 							inputMode='tel'
@@ -146,7 +146,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 				<div className='flex flex-col w-full mb-6'>
 					<label
 						htmlFor={emailId}
-						className='text-2xl font-normal text-primary-foreground my-4'>
+						className='text-xl font-normal text-primary-foreground my-4'>
 						Email Address
 					</label>
 					<input
@@ -166,7 +166,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 								? `${emailId}-error`
 								: undefined
 						}
-						className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-lg'
+						className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground text-md'
 						placeholder='Enter your email address'
 						autoComplete='email'
 						inputMode='email'
@@ -184,7 +184,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 				<div className='flex flex-col w-full mb-2'>
 					<label
 						htmlFor={msgId}
-						className='text-2xl font-normal text-primary-foreground my-4'>
+						className='text-xl font-normal text-primary-foreground my-4'>
 						How can I help?
 					</label>
 					<textarea
@@ -199,7 +199,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 								? `${msgId}-error`
 								: undefined
 						}
-						className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground min-h-[150px] text-lg'
+						className='p-3 bg-white border-2 border-opacity-55 border-primary rounded-lg text-primary-secondary placeholder-muted-foreground min-h-[150px] text-md'
 						placeholder='Please describe your reason for contacting us'
 					/>
 					{errors.contact_message && (
@@ -212,7 +212,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 				</div>
 
 				{/* Submit */}
-				<div className='flex w-full h-full justify-end my-6 items-center text-lg'>
+				<div className='flex w-full h-full justify-end my-6 items-center text-md'>
 					<Button
 						variant='default'
 						type='submit'
@@ -230,7 +230,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 							setSubmissionStatus(null);
 							setStatusMsg("");
 						}}
-						className='self-end text-white text-center text-lg p-4 border-primary-foreground/50 bg-primary rounded-full border-4 w-auto'
+						className='self-end text-white text-center text-lg p-4  mt-6 border-primary-foreground/50 bg-primary rounded-full border-4 w-auto'
 						aria-label='Dismiss success message'>
 						Form submitted successfully!
 					</button>

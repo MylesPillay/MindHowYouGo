@@ -123,8 +123,8 @@ const HeroSection = () => {
 							<Image
 								src='/assets/images/companyLogo.png'
 								alt='Company logo'
-								width={570}
-								height={690}
+								width={450}
+								height={570}
 							/>
 						</div>
 					</div>
@@ -134,7 +134,7 @@ const HeroSection = () => {
 							id='hero-title'
 							className='h-18 justify-center w-full pr-44 p-2
 						text-center text-primary
-						xl:text-8xl lg:text-6xl md:text-4xl text-3xl'>
+						xl:text-6xl lg:text-4xl md:text-3xl text-2xl'>
 							<span className='mr-2 font-light'>
 								{companyTitle[0] ?? ""}
 							</span>
@@ -152,14 +152,14 @@ const HeroSection = () => {
 						<h2
 							id='hero-subtitle'
 							className='relative text-primary-secondary font-light text-center w-full pr-40
-								xl:text-4xl lg:text-3xl md:text-2xl text-3xl'>
+								xl:text-3xl lg:text-2xl md:text-xl text-2xl'>
 							{initialHero?.intro_message || ""}
 						</h2>
 					</div>
 				</div>
 				{/* CTA Row */}
 				<div className='mt-20 flex flex-col md:flex-row gap-4 h-full items-center text-left'>
-					<h3 className='inline-block p-2 text-4xl font-light text-center text-primary'>
+					<h3 className='inline-block p-2 text-3xl font-light text-center text-primary'>
 						{initialHero?.cta_message || ""}
 					</h3>
 
@@ -173,7 +173,7 @@ const HeroSection = () => {
 									block: "start"
 								});
 						}}
-						className='px-8 py-4 ml-1 text-2xl font-medium text-white rounded-full bg-gradient-to-r from-primary/60 to-primary-secondary transition-all duration-500 ease-in-out shadow-md hover:shadow-lg hover:brightness-110 hover:scale-105 hover:to-primary-foreground hover:from-primary border-2 border-opacity-100 border-yellow-400'
+						className='px-8 py-4 ml-1 text-xl font-medium text-white rounded-full bg-gradient-to-r from-primary/60 to-primary-secondary transition-all duration-500 ease-in-out shadow-md hover:shadow-lg hover:brightness-110 hover:scale-105 hover:to-primary-foreground hover:from-primary border-2 border-opacity-100 border-yellow-400'
 						aria-label='Scroll to About Me section'>
 						{initialHero?.cta_button_text || "Take Action"}
 					</button>

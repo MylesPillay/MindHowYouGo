@@ -26,10 +26,10 @@ const H = ({
 	const Tag = (["h1", "h2", "h3"] as const)[level - 1];
 	const cls =
 		level === 1
-			? "text-5xl md:text-6xl font-semibold text-primary text-left"
+			? "text-3xl md:text-4xl font-semibold text-primary text-left"
 			: level === 2
-			? "text-3xl md:text-4xl font-light text-primary-secondary mt-12  text-left"
-			: "text-2xl md:text-3xl font-light text-primary-secondary mt-8  text-left";
+			? "text-1xl md:text-2xl font-light text-primary-secondary mt-12  text-left"
+			: "text-xl md:text-1xl font-light text-primary-secondary mt-8  text-left";
 
 	return (
 		<Tag id={id} className={`${cls} scroll-mt-24`}>
@@ -48,15 +48,15 @@ const Subheading = ({
 	<p
 		className={`mt-3 text-left  ${
 			style === "muted"
-				? "text-md text-muted-foreground"
-				: "text-base text-primary-secondary"
+				? "font-medium text-muted-foreground"
+				: "font-normal text-primary-secondary"
 		}`}>
 		{children}
 	</p>
 );
 
 const P = ({ children }: { children: React.ReactNode }) => (
-	<p className='mt-6 text-primary-secondary text-xl font-light text-left '>
+	<p className='mt-6 text-primary-secondary text-sm font-light text-left '>
 		{children}
 	</p>
 );
@@ -72,7 +72,7 @@ const ListBlock = ({
 	const base = ordered ? "list-decimal" : "list-disc";
 	return (
 		<Wrapper
-			className={`mt-6 ${base} text-primary-secondary text-xl font-light space-y-2 pl-6`}>
+			className={`mt-6 ${base} text-primary-secondary text-md font-light space-y-2 pl-6`}>
 			{items.map((it, i) => (
 				<li key={i}>{it}</li>
 			))}

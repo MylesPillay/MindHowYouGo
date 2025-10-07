@@ -1,5 +1,4 @@
 import * as React from "react";
-import "../../../../../src/app/global.css";
 interface VariantStyles {
 	[key: string]: string;
 }

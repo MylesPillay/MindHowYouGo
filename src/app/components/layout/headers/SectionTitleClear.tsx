@@ -24,7 +24,7 @@ const SectionTitleClear: React.FC<SectionTitleClearProps> = ({
 				<h3
 					style={{
 						letterSpacing: 1,
-						fontSize: inset ? undefined : "3rem"
+						fontSize: inset ? undefined : "2.6rem"
 					}}>
 					<span
 						className={`text-white font-light ${

@@ -119,7 +119,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 				className={`flex flex-col w-full h-auto justify-evenly items-center mx-auto gap-y-10 ${
 					abridged ? "pt-20 mt-2" : "pt-20 pb-16"
 				}`}>
-				<h3 className='text-center w-full text-primary-secondary text-2xl font-light self-center max-w-[60vw] mt-10'>
+				<h3 className='text-center w-full text-primary-secondary text-xl font-light self-center max-w-[60vw] mt-10'>
 					{whyChooseMeContent.cbt.body}
 				</h3>
 				{abridged ? null : (
@@ -127,17 +127,17 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 						<TextBox
 							variant='light-long'
 							className='justify-center w-[65%] text-center mx-auto mt-16 '>
-							<h3 className='text-primary-secondary text-2xl font-light max-w-[70vw] p-6 mx-auto'>
+							<h3 className='text-primary-secondary text-xl font-light max-w-[70vw] p-6 mx-auto'>
 								{whyChooseMeContent.legalClarity.body}
 							</h3>
 						</TextBox>
 
-						<h3 className='text-primary-secondary text-2xl my-10 font-light justify-center text-center mx-auto md:max-w-[60%]'>
+						<h3 className='text-primary-secondary text-xl my-10 font-light justify-center text-center mx-auto md:max-w-[60%]'>
 							{whyChooseMeContent.accreditation.body}
 						</h3>
 						<div className='flex flex-col md:flex-row-reverse w-[80%] justify-around items-center gap-8 px-4'>
 							{whyChooseMeContent.accreditation.withLogo && (
-								<div className='w-full md:w-[20%] rounded-2xl text-primary font-semibold text-5xl justify-around items-center self-center'>
+								<div className='w-full md:w-[20%] rounded-2xl text-primary font-semibold text-3xl justify-around items-center self-center'>
 									<Image
 										className='m-auto h-[140px] w-[180px]'
 										src={
@@ -160,7 +160,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 									/>
 								</div>
 							)}
-							<h3 className='flex text-center w-[75%] ml-20 p-2 text-primary-secondary text-2xl font-light self-center'>
+							<h3 className='flex text-center w-[75%] ml-20 p-2 text-primary-secondary text-xl font-light self-center'>
 								{whyChooseMeContent.finalCallout.body}
 							</h3>
 						</div>

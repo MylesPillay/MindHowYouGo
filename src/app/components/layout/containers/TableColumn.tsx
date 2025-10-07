@@ -13,7 +13,7 @@ interface TableColumnCellProps {
 
 const TableColumnCell = ({
 	heading = "",
-	headingSize = "text-xl",
+	headingSize = "text-lg",
 	children,
 	className,
 	icon,
@@ -70,7 +70,7 @@ ${active ? "border-primary-foreground" : "border-primary"}`}>
 								className={`font-medium text-primary ${
 									headingSize
 										? `${headingSize} text-nowrap`
-										: "text-xl mb-2"
+										: "text-lg mb-2"
 								}`}>
 								{heading}
 							</h4>

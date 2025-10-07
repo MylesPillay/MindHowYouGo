@@ -21,9 +21,9 @@ interface TextBoxProps {
 const TextBox = ({
 	variant = "light",
 	text,
-	textSize = "text-xl",
+	textSize = "text-lg",
 	heading = "",
-	headingSize = "text-2xl",
+	headingSize = "text-xl",
 	children,
 	className,
 	icon
@@ -42,7 +42,7 @@ const TextBox = ({
 		<div
 			key={`container_textBox-${heading}`}
 			className={`
-				flex flex-col border-2 rounded-2xl p-[2px] my-6
+				flex flex-col border-2 rounded-xl p-[2px] my-6
 				${isLightVariant ? "border-primary-foreground" : "border-primary"}
 				${containerWidth} ${className}
 			`}>

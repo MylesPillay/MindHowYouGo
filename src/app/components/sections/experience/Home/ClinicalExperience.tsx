@@ -104,7 +104,7 @@ const ClinicalExperience = () => {
 					{textBlocks?.section_title}
 				</h2>
 
-				<p className='w-[65%] text-center text-primary-secondary text-2xl font-light leading-relaxed py-10'>
+				<p className='w-[65%] text-center text-primary-secondary text-xl font-light leading-relaxed py-10'>
 					{textBlocks.text_slice_1}{" "}
 					<span className='text-primary-foreground font-medium'>
 						{textBlocks.text_highlight_1}
@@ -161,7 +161,7 @@ const ClinicalExperience = () => {
 												: "opacity-60"
 										}`}
 									/>
-									<span className='text-primary text-xl font-medium'>
+									<span className='text-primary text-md font-medium'>
 										{cat?.category}
 									</span>
 								</button>
@@ -171,7 +171,7 @@ const ClinicalExperience = () => {
 
 					{/* Right: Tab panel */}
 					<div className='w-full bg-white'>
-						<h3 className='text-4xl font-light -ml-[1px] text-white border-b py-4 border-b-primary p-5 pl-8 bg-primary-foreground bg-opacity-65'>
+						<h3 className='text-3xl font-light -ml-[1px] text-white border-b py-4 border-b-primary p-5 pl-8 bg-primary-foreground bg-opacity-65'>
 							{activeCategory.category}
 						</h3>
 
@@ -192,7 +192,7 @@ const ClinicalExperience = () => {
 								{panelItems.map((item, idx) => (
 									<li
 										key={`${activeCategory?.category}-${idx}`}
-										className='break-inside-avoid flex items-start gap-4 text-primary-secondary text-2xl font-light'>
+										className='break-inside-avoid flex items-start gap-4 text-xl font-light'>
 										<FaCheckCircle
 											className='text-primary mt-1 shrink-0'
 											aria-hidden='true'

@@ -55,7 +55,7 @@ const AboutMe = ({ id }: { id: string }) => {
 				{content.section_bottom_text_1}{" "}
 				<a
 					aria-label="text hyperlink navigating to 'Services' Page."
-					className='text-semibold text-primary'
+					className='font-medium text-primary'
 					href='/services'>
 					{content.section_click_text}
 				</a>{" "}
@@ -72,13 +72,13 @@ const AboutMe = ({ id }: { id: string }) => {
 				<SectionTitleClear title={aboutMeContent.title} />
 				<div className='flex flex-row w-[100%] h-auto justify-evenly align-middle items-center pt-20'>
 					<div className='flex flex-col w-auto'>
-						<h1 className='flex w-full justify-center   text-primary-foreground lg:text-6xl mb-8 font-light'>
+						<h1 className='flex w-full justify-center   text-primary-foreground lg:text-5xl mb-8 font-light'>
 							{aboutMeContent.intro}
 						</h1>
 						<TextBox
 							text={aboutMeContent.body}
 							variant='light'
-							textSize='text-2xl'
+							textSize='text-xl'
 						/>
 					</div>
 					<div className='w-80 h-80 rounded-full overflow-hidden relative flex items-center align-self-start justify-center mt-16 -ml-16'>
@@ -91,7 +91,7 @@ const AboutMe = ({ id }: { id: string }) => {
 						/>
 					</div>
 				</div>
-				<h3 className='flex text-center w-[55%] mt-20 p-2 text-slate-600  text-2xl font-light self-center'>
+				<h3 className='flex text-center w-[55%] mt-20 p-2 text-slate-600  text-xl font-light self-center'>
 					{aboutMeContent.closing}
 				</h3>
 			</div>

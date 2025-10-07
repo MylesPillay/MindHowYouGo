@@ -1,7 +1,4 @@
-"use client";
 import Link from "next/link";
-import Logo from "./ClickableLogo";
-import { NAV_ITEMS } from "./DesktopMenu";
 
 const Footer = () => {
 	const footerLinks = [
@@ -17,7 +14,7 @@ const Footer = () => {
 					<div key={link.name} className='flex items-center'>
 						<Link
 							href={link.href}
-							className='cursor-pointer text-white hover:text-yellow-400 hover:text-opacity-90 transition-colors duration-300 text-lg font-medium'>
+							className='cursor-pointer text-white hover:text-yellow-400 hover:text-opacity-90 transition-colors duration-300 text-md font-medium'>
 							{link.name}
 						</Link>
 						{index < footerLinks.length - 1 && (

@@ -82,7 +82,7 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 										className='text-primary-foreground mb-2 shrink-0'
 										size={20}
 									/>
-									<p className='text-primary-secondary text-xl text-center md:text-left pt-4 mb-4 line-clamp-4 p-6'>
+									<p className='text-primary-secondary text-lg text-center md:text-left pt-4 mb-4 line-clamp-4 p-6'>
 										{testimonial.text}
 									</p>
 									<FaQuoteRight
@@ -108,10 +108,10 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 										size={20}
 									/>
 									<div className='flex flex-col w-full text-left p-6 pb-2'>
-										<p className='text-primary-secondary text-xl text-center md:text-left mb-4'>
+										<p className='text-primary-secondary text-lg text-center md:text-left mb-4'>
 											{testimonial.text}
 										</p>
-										<p className='text-primary text-xl text-left md:text-left pt-0 font-medium'>
+										<p className='text-primary text-lg text-left md:text-left pt-0 font-medium'>
 											{testimonial.name}
 										</p>
 									</div>
