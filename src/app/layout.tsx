@@ -61,16 +61,16 @@ export default function RootLayout({
 			{/* single body lives here */}
 			<body className='flex min-h-screen w-full flex-col text-white overflow-x-hidden'>
 				{/* Desktop nav (client component) */}
-				<DesktopNav
-					items={NAV_ITEMS}
-					walkingData={walkingData}
-					badgeImageSrc='/assets/images/BABCP-logo.webp'
-					className='border-yellow-400'
-				/>
-				<div className='border-t-2 border-primary-foreground mt-[1px] w-[120%]' />
 
 				{/* ClientRoot provides background scroll effect, mobile menu, and contexts */}
 				<ClientRoot>
+					<DesktopNav
+						items={NAV_ITEMS}
+						walkingData={walkingData}
+						badgeImageSrc='/assets/images/BABCP-logo.webp'
+						className='border-yellow-400'
+					/>
+					<div className='border-t-2 border-primary-foreground mt-[1px] w-[120%]' />
 					{/* Main page content */}
 					<main className='relative w-screen flex-1'>{children}</main>
 					{/* Footer inside body, after content */}

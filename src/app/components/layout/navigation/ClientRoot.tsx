@@ -7,15 +7,15 @@ import {
 	finalColorStr,
 	initialColorStr
 } from "@/utils/helpers/appearance/scrollColorBG";
-import { NAV_ITEMS } from "./DesktopMenu";
-import MobileMenu from "./MobileNav";
+// import { NAV_ITEMS } from "./DesktopMenu";
+// import MobileMenu from "./MobileNav";
 
 export default function ClientRoot({
 	children
 }: {
 	children: React.ReactNode;
 }) {
-	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	// const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [bgColor, setBgColor] = useState(initialColorStr);
 	useEffect(() => {
 		return attachScrollColor({
@@ -43,11 +43,11 @@ export default function ClientRoot({
 			}}
 			className='flex relative flex-col h-full w-full text-white overflow-x-hidden sticky-top-0!'>
 			<SessionContextProvider supabaseClient={supabase}>
-				<MobileMenu
+				{/* <MobileMenu
 					isOpen={mobileMenuOpen}
 					setOpen={setMobileMenuOpen}
 					items={NAV_ITEMS}
-				/>
+				/> */}
 				{/* Main */}
 				<main className='h-full w-screen relative'>{children}</main>
 			</SessionContextProvider>

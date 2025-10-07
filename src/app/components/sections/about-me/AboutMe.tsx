@@ -83,7 +83,7 @@ const AboutMe = ({ id }: { id: string }) => {
 					</div>
 					<div className='w-80 h-80 rounded-full overflow-hidden relative flex items-center align-self-start justify-center mt-16 -ml-16'>
 						<Image
-							src='/assets/images/Kiran.png'
+							src='/assets/images/Kiran.jpg'
 							alt='Photo of me: Kiran Sharma'
 							fill
 							sizes='400px'
