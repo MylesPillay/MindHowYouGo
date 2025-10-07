@@ -43,12 +43,6 @@ export default function ClientRoot({
 			}}
 			className='flex relative flex-col h-full w-full text-white overflow-x-hidden sticky-top-0!'>
 			<SessionContextProvider supabaseClient={supabase}>
-				{/* <MobileMenu
-					isOpen={mobileMenuOpen}
-					setOpen={setMobileMenuOpen}
-					items={NAV_ITEMS}
-				/> */}
-				{/* Main */}
 				<main className='h-full w-screen relative'>{children}</main>
 			</SessionContextProvider>
 		</div>

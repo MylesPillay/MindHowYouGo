@@ -1,10 +1,11 @@
+import "./global.css";
 import type { Metadata } from "next";
 import walkingData from "../../public/assets/animations/walking.json";
 import DesktopNav, {
 	NAV_ITEMS
 } from "./components/layout/navigation/DesktopMenu";
 import Footer from "./components/layout/navigation/Footer";
-import dynamic from "next/dynamic";
+import ClientRoot from "./components/layout/navigation/ClientRoot";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.mindhowyougo.co.uk"),
@@ -46,10 +47,6 @@ export const metadata: Metadata = {
 		apple: "/apple-touch-icon.png"
 	}
 };
-const ClientRoot = dynamic(
-	() => import("./components/layout/navigation/ClientRoot"),
-	{ ssr: false }
-);
 
 export default function RootLayout({
 	children
