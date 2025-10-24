@@ -6,6 +6,7 @@ import DesktopNav, {
 } from "./components/layout/navigation/DesktopMenu";
 import Footer from "./components/layout/navigation/Footer";
 import ClientRoot from "./components/layout/navigation/ClientRoot";
+import { MobileMenu } from "./components/layout/navigation/MobileNav";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.mindhowyougo.co.uk"),
@@ -65,8 +66,8 @@ export default function RootLayout({
 						items={NAV_ITEMS}
 						walkingData={walkingData}
 						badgeImageSrc='/assets/images/BABCP-logo.webp'
-						className='border-yellow-400'
 					/>
+					<MobileMenu items={NAV_ITEMS} />
 					<div className='border-t-2 border-primary-foreground mt-[1px] w-[120%]' />
 					{/* Main page content */}
 					<main className='relative w-screen flex-1'>{children}</main>

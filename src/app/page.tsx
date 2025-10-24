@@ -10,6 +10,8 @@ import AnimatedSectionTitle from "./components/layout/headers/AnimatedTitle";
 import SectionTitleClear from "./components/layout/headers/SectionTitleClear";
 
 import type { Metadata } from "next";
+import { MobileHeroSection } from "./components/sections/hero/MobileHeroSection";
+import { MobileAboutMe } from "./components/sections/about-me/MobileAboutMe";
 
 export const metadata: Metadata = {
 	title: "Mind How You Go | CBT Therapy with Dr Kiran Sharma.",
@@ -40,8 +42,19 @@ export const metadata: Metadata = {
 export default async function Home() {
 	return (
 		<div className='flex flex-col justify-between w-[100%] overflow-x-hidden'>
-			<HeroSection />
-			<AboutMe id='about-me' />
+			<div className='sm:flex hidden'>
+				<HeroSection />
+			</div>
+			<div className='sm:hidden flex'>
+				<MobileHeroSection />
+			</div>
+			<div className='sm:flex hidden'>
+				<AboutMe id='about-me' />
+			</div>
+			<div className='sm:hidden flex'>
+				<MobileAboutMe id='about-me' />
+			</div>
+
 			<div className='my-2 md:my-8' />
 			<SectionTitleClear title={`What can I expect from therapy?`} />
 			<CBTExplained />

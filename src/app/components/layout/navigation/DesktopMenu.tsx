@@ -23,14 +23,12 @@ type Props = {
 	items: NavItem[];
 	walkingData: object;
 	badgeImageSrc: string;
-	className?: string;
 };
 
 export default function DesktopNav({
 	items,
 	walkingData,
-	badgeImageSrc,
-	className = ""
+	badgeImageSrc
 }: Props) {
 	const walkerRef = React.useRef<HTMLDivElement | null>(null);
 	const trackRef = React.useRef<HTMLDivElement | null>(null);
@@ -51,9 +49,7 @@ export default function DesktopNav({
 	return (
 		<nav
 			className={[
-				"hidden relative items-center w-[120%] justify-between space-x-6 !sm:sticky-top-10 sm:flex",
-				"pr-[20vw] flex-row h-[80px]",
-				className
+				"hidden relative sm:flex items-center w-[120%] justify-between space-x-6 !sm:sticky-top-10	pr-[20vw] flex-row h-[80px] border-yellow-400"
 			].join(" ")}
 			role='navigation'
 			aria-label='Primary'>
