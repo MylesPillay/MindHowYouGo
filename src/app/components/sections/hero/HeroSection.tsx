@@ -289,7 +289,7 @@ const HeroSection = () => {
 					{/* Left: Decorative frame / image */}
 					<div className='flex justify-center md:justify-end'>
 						<div
-							className='relative w-full max-w-[320px] sm:max-w-[360px] md:max-w-[380px] lg:max-w-[420px] xl:max-w-[440px] aspect-[3/4] max-h-[460px] sm:max-h-[400px] md:max-h-[420px] lg:max-h-[450px] xl:max-h-[460px]'
+							className='relative w-full max-w-[320px] sm:max-w-[360px] md:max-w-[380px] lg:max-w-[420px] xl:max-w-[440px] aspect-[3/4] max-h-[460px] sm:max-h-[410px] md:max-h-[430px] lg:max-h-[450px] xl:max-h-[490px]'
 							aria-hidden='true'>
 							{/* Outer frame */}
 							<div className='absolute inset-0 border-4 border-primary-secondary/60 rounded-t-full rounded-b-none p-1 overflow-hidden'>
