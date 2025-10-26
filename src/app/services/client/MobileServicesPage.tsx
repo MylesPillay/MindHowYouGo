@@ -15,13 +15,15 @@ const MobileHomeSingleScroll = (): JSX.Element => {
 	return (
 		<main
 			className={[
-				"w-full min-h-[100dvh] bg-background",
+				"w-[120%] -ml-12 min-h-[100dvh] bg-background",
 				"flex flex-col items-center",
-				"px-4 pb-16"
+				"pt-16 pb-16"
 			].join(" ")}
 			aria-label='Mind How You Go — Mobile Home'>
 			{/* SERVICES / CBT TREATMENT */}
-			<section id='services' className='w-full max-w-md mx-auto pt-6'>
+			<section
+				id='services'
+				className='w-full max-w-md pt-6 justify-center mx-auto'>
 				<MobileWhyChooseMe abridged={true} />
 				<div className='mt-6'>
 					<MobileCBTExplained abridged={true} />

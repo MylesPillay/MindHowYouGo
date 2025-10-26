@@ -44,8 +44,8 @@ export const metadata: Metadata = {
 		"Mental Health"
 	],
 	icons: {
-		icon: "/favicon.ico",
-		apple: "/apple-touch-icon.png"
+		icon: "/assets/icons/cbt.png",
+		apple: "/assets/icons/cbt.png"
 	}
 };
 

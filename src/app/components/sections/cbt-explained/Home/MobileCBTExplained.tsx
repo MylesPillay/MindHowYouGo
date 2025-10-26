@@ -242,7 +242,7 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 			}}
 			aria-labelledby='cbt-title'>
 			{/* Title (observer target) */}
-			<div className='w-full max-w-md -ml-20 mb-10' ref={titleRef}>
+			<div className='w-[110%] max-w-md -ml-20 mb-10' ref={titleRef}>
 				<SectionTitleClear
 					id='cbt-title'
 					title={view.title}

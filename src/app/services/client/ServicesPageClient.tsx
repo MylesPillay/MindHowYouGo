@@ -304,7 +304,7 @@ function DesktopPanes() {
 			<div
 				style={{ scrollbarWidth: "none" }}
 				ref={containerRef}
-				className='relative flex w-full overflow-x-auto snap-x snap-mandatory scroll-smooth'
+				className='relative flex w-full overflow-x-auto snap-x snap-mandatory scroll-smooth '
 				aria-label='Horizontally scrollable services sections'>
 				{PANES.map((p) => (
 					<div
