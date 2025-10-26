@@ -12,6 +12,11 @@ import SectionTitleClear from "./components/layout/headers/SectionTitleClear";
 import type { Metadata } from "next";
 import { MobileHeroSection } from "./components/sections/hero/MobileHeroSection";
 import { MobileAboutMe } from "./components/sections/about-me/MobileAboutMe";
+import { MobileCBTExplained } from "./components/sections/cbt-explained/Home/MobileCBTExplained";
+import MobileWhyChooseMe from "./components/sections/why-me/MobileWhyChooseMe";
+import MobileClinicalExperience from "./components/sections/experience/Home/MobileClinicalExperience";
+import MobilePatientTestimonials from "./components/sections/testimonies/MobilePatientTestimonies";
+import MobileContactForm from "./components/sections/contact/Home/ContactForm";
 
 export const metadata: Metadata = {
 	title: "Mind How You Go | CBT Therapy with Dr Kiran Sharma.",
@@ -32,7 +37,6 @@ export const metadata: Metadata = {
 		title: "CBT Therapy in Bristol | BABCP-Accredited | Free Intro Call",
 		description:
 			"Evidence-based CBT with monitored progress. Options for online video sessions or walk-and-talk therapy across Bristol. Confidential, ethical care (BABCP code)."
-		// images: [{ url: "/og-home.jpg", width: 1200, height: 630, alt: "Mind How You Go - CBT in Bristol" }],
 	},
 	alternates: {
 		canonical: "https://www.mindhowyougo.co.uk/"
@@ -54,18 +58,43 @@ export default async function Home() {
 			<div className='sm:hidden flex'>
 				<MobileAboutMe id='about-me' />
 			</div>
+			{/* <div className='my-2 md:my-8' /> */}
+			<div className='sm:flex flex-col hidden'>
+				<SectionTitleClear title={`What can I expect from therapy?`} />
+				<CBTExplained />
+			</div>
+			<div className='sm:hidden flex'>
+				<MobileCBTExplained />
+			</div>
+			{/* <div className='my-2 md:my-8' /> */}
+			<div className='sm:flex flex-col hidden'>
+				<WhyChooseMe />
+			</div>
+			<div className='sm:hidden flex'>
+				<MobileWhyChooseMe />
+			</div>
 
-			<div className='my-2 md:my-8' />
-			<SectionTitleClear title={`What can I expect from therapy?`} />
-			<CBTExplained />
-			<div className='my-2 md:my-8' />
-			<WhyChooseMe />
-			<div className='my-2 md:my-8' />
-			<AnimatedSectionTitle title={`Services offered`} />
-			<ClinicalExperience />
-			<div className='my-2 md:my-8' />
-			<PatientTestimonials id='testimonies' />
-			<ContactForm id='contact' />
+			{/* <div className='my-2 md:my-8' /> */}
+			<div className='sm:flex flex-col hidden'>
+				<AnimatedSectionTitle title={`Services offered`} />
+				<ClinicalExperience />
+			</div>
+			<div className='sm:hidden flex'>
+				<MobileClinicalExperience />
+			</div>
+			{/* <div className='my-2 md:my-8' /> */}
+			<div className='sm:flex flex-col hidden'>
+				<PatientTestimonials id='testimonies' />
+			</div>
+			<div className='sm:hidden flex'>
+				<MobilePatientTestimonials id='testimonies' />
+			</div>
+			<div className='sm:flex hidden'>
+				<ContactForm id='contact' />
+			</div>
+			<div className='sm:hidden flex'>
+				<MobileContactForm id='contact' />
+			</div>
 			{/* <RecentBlogPosts id='blog' /> */}
 			<div className='my-20' />
 		</div>

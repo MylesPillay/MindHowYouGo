@@ -27,6 +27,7 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 	// one-time flags
 	const [hasAnimated, setHasAnimated] = useState(false);
 	const [imageVisible, setImageVisible] = useState(false);
+	const [mainTextVisible, setMainTextVisible] = useState(false);
 
 	// per-word flags
 	const [hiVisible, setHiVisible] = useState(false);
@@ -36,6 +37,7 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 	const sectionRef = useRef<HTMLElement | null>(null);
 	const titleWrapRef = useRef<HTMLDivElement | null>(null);
 	const textRef = useRef<HTMLDivElement | null>(null);
+	const mainTextRef = useRef<HTMLDivElement | null>(null);
 	const imageRef = useRef<HTMLDivElement | null>(null);
 
 	// prevent double-start in StrictMode
@@ -51,6 +53,9 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 	}, []);
 	const textRefCb = useCallback((node: HTMLDivElement | null) => {
 		textRef.current = node;
+	}, []);
+	const mainTextRefCb = useCallback((node: HTMLDivElement | null) => {
+		mainTextRef.current = node;
 	}, []);
 	const imageRefCb = useCallback((node: HTMLDivElement | null) => {
 		imageRef.current = node;
@@ -125,20 +130,22 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 				setImVisible(true);
 				setNameVisible(true);
 				setImageVisible(true);
+				setMainTextVisible(true);
 				setHasAnimated(true);
 				return;
 			}
-
-			// Stagger: Hi -> I'm -> Kiran -> Image
 			setHiVisible(true);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setImVisible(true), 130)
+				window.setTimeout(() => setImageVisible(true), 200)
 			);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setNameVisible(true), 260)
+				window.setTimeout(() => setImVisible(true), 280)
 			);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setImageVisible(true), 380)
+				window.setTimeout(() => setNameVisible(true), 300)
+			);
+			timeoutsRef.current.push(
+				window.setTimeout(() => setMainTextVisible(true), 450)
 			);
 			setHasAnimated(true);
 		};
@@ -196,9 +203,8 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 			}}>
 			{/* Title wrapper (observer target) */}
 			<div className='w-full max-w-md -ml-20 mb-10' ref={titleWrapRefCb}>
-				<SectionTitleClear title={content.section_title} />
+				<SectionTitleClear title={content.section_title} mobileScreen />
 			</div>
-
 			{/* Image: slides in from right to final -mr-[80%] position */}
 			<div
 				className='mt-8 w-full max-w-md flex justify-center'
@@ -252,22 +258,32 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 				</h2>
 
 				{/* Line 2: Kiran */}
-				<h2 className='text-5xl leading-tight font-light ml-20 text-primary-foreground text-pretty text-left'>
-					<span
-						className={[
-							"inline-block transform transition-all duration-700 ease-out will-change-transform",
-							nameVisible
-								? "opacity-100 translate-x-0"
-								: "opacity-0 -translate-x-6"
-						].join(" ")}>
-						{nameText}
-					</span>
-				</h2>
+				<div ref={mainTextRefCb}>
+					<h2 className='text-6xl leading-tight font-light ml-20 text-primary text-pretty text-left'>
+						<span
+							className={[
+								"inline-block transform transition-all duration-700 ease-out will-change-transform",
+								nameVisible
+									? "opacity-100 translate-x-16"
+									: "opacity-0 -translate-x-6"
+							].join(" ")}>
+							{nameText}
+						</span>
+					</h2>
+				</div>
 			</div>
 
 			{/* Body */}
 			<p className='font-normal text-lg text-primary-secondary p-6'>
-				{content.section_main_text}
+				<span
+					className={[
+						"inline-block transform transition-all duration-700 ease-out will-change-transform",
+						mainTextVisible
+							? "opacity-100 -translate-y-20"
+							: "opacity-80 translate-y-20"
+					].join(" ")}>
+					{content.section_main_text}
+				</span>
 			</p>
 
 			{/* Closing */}

@@ -16,6 +16,7 @@ type AnimatedSectionTitleProps = {
 	inset?: boolean;
 	className?: string;
 	animated?: boolean;
+	mobileScreen?: boolean;
 };
 
 const AnimatedSectionTitle: React.FC<AnimatedSectionTitleProps> = ({
@@ -23,7 +24,8 @@ const AnimatedSectionTitle: React.FC<AnimatedSectionTitleProps> = ({
 	variant = "light",
 	inset = false,
 	animated = true,
-	className = ""
+	className = "",
+	mobileScreen = false
 }) => {
 	const walkerRef = React.useRef<HTMLDivElement | null>(null);
 	const trackRef = React.useRef<HTMLDivElement | null>(null);
@@ -55,7 +57,9 @@ const AnimatedSectionTitle: React.FC<AnimatedSectionTitleProps> = ({
 			${className}`}>
 			<div
 				ref={walkerRef}
-				className='absolute bottom-[5px] left-0 -ml-28 w-[90px] h-[80px] pointer-events-none z-0'
+				className={`absolute bottom-[5px] left-0 -ml-28 pointer-events-none z-0 ${
+					mobileScreen ? "w-[50px] h-[45px]" : "w-[90px] h-[80px]"
+				}`}
 				aria-hidden>
 				<Lottie animationData={walkingData} loop autoplay />
 			</div>
@@ -66,7 +70,11 @@ const AnimatedSectionTitle: React.FC<AnimatedSectionTitleProps> = ({
 				].join(" ")}
 				style={{
 					letterSpacing: 1,
-					fontSize: inset ? undefined : "2.6rem"
+					fontSize: inset
+						? undefined
+						: mobileScreen
+						? "1.7rem"
+						: "2.6rem"
 				}}>
 				<span className={`text-white ${inset ? "" : "ml-[12vw]"}`}>
 					{title}

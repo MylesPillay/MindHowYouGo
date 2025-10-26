@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ServicesContactForm from "../components/sections/contact/Services/ServicesContactForm";
+import ContactForm from "../components/sections/contact/Home/ContactForm";
 
 export const metadata: Metadata = {
 	title: "Contact Us",
@@ -20,10 +21,17 @@ export const metadata: Metadata = {
 
 export default function Contact() {
 	return (
-		<div className='h-screen w-full overflow-x-hidden overflow-y-auto m-none pr-0 border-0 sm:border-l-[0.5px]'>
-			<div className='sticky top-0 flex flex-grow flex-row justify-start items-baseline w-full my-0 sm:pl-8 sm:pr-8 pt-10 pb-4 bg-opacity-100 border-b sm:border-0 z-50'>
-				<div className='flex flex-row flex-1 justify-between w-auto'>
-					<ServicesContactForm />
+		<div className='h-full w-full overflow-x-hidden overflow-y-auto m-none pr-0 border-0 sm:border-l-[0.5px] my-20 mt-9'>
+			<div className='block sm:hidden'>
+				<ContactForm id='mobile-contact-form' />
+			</div>
+
+			{/* DESKTOP/TABLET VERSION */}
+			<div className='hidden sm:block'>
+				<div className='sticky top-0 flex flex-grow flex-row justify-start items-baseline w-full my-0 sm:pl-8 sm:pr-8 pt-10 pb-4 bg-opacity-100 border-b sm:border-0 z-50'>
+					<div className='flex flex-row flex-1 justify-between w-auto'>
+						<ServicesContactForm />
+					</div>
 				</div>
 			</div>
 		</div>

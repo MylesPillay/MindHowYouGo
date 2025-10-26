@@ -45,8 +45,12 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 	const statusId = "form-status";
 
 	return (
-		<div className='flex flex-col items-center w-full py-20 px-4 md:px-16'>
-			<AnimatedSectionTitle title='Get In Touch' className='pl-28' />
+		<div className='flex flex-col items-center w-full pt-8 px-4 md:px-16'>
+			<AnimatedSectionTitle
+				title='Get In Touch'
+				className='pl-6'
+				mobileScreen
+			/>
 			<p
 				id={statusId}
 				role='status'
@@ -62,7 +66,7 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 			</p>
 
 			<form
-				className='flex flex-col justify-center w-[70%] my-20'
+				className='flex flex-col justify-center w-[85%] mt-10'
 				onSubmit={handleSubmit(onSubmit)}
 				aria-describedby={statusId}>
 				{/* Name + Phone */}

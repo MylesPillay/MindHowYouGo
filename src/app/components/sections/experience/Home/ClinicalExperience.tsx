@@ -119,10 +119,10 @@ const ClinicalExperience = () => {
 					</span>
 				</p>
 
-				<div className='flex flex-col xl:flex-row w-[90%] max-w-[1100px] border-2 border-primary rounded-xl overflow-hidden shadow-sm my-10'>
+				<div className='flex flex-col sm:flex-row w-[90%] max-w-[1100px] border-2 border-primary rounded-xl overflow-hidden shadow-sm my-10'>
 					{/* Left: Tablist */}
 					<div
-						className='flex flex-col w-full xl:w-[40%] border-r-2 border-primary'
+						className='flex flex-col w-auto xl:min-w-[40%] lg:min-w-[50%] md:min-w-[42%] sm:min-w-[40%] border-r-2 border-primary'
 						role='tablist'
 						aria-label='Clinical experience content'
 						id={tablistId}
@@ -161,7 +161,7 @@ const ClinicalExperience = () => {
 												: "opacity-60"
 										}`}
 									/>
-									<span className='text-primary text-md font-medium'>
+									<span className='text-primary text-md font-medium md:text-nowrap text-wrap mr-4'>
 										{cat?.category}
 									</span>
 								</button>
@@ -188,11 +188,11 @@ const ClinicalExperience = () => {
 								animate={{ opacity: 1, y: 0 }}
 								exit={{ opacity: 0, y: -10 }}
 								transition={{ duration: 0.3 }}
-								className='columns-1 sm:columns-2 break-inside-avoid gap-4 space-y-4 p-8 pt-5'>
+								className='columns-1 sm:columns-2 break-inside-avoid gap-4 space-y-6 p-8 pt-5'>
 								{panelItems.map((item, idx) => (
 									<li
 										key={`${activeCategory?.category}-${idx}`}
-										className='break-inside-avoid flex items-start gap-4 text-xl font-light text-primary-secondary'>
+										className='break-inside-avoid flex items-start gap-4 lg:text-xl md:text-lg sm:text-md font-light text-primary-secondary'>
 										<FaCheckCircle
 											className='text-primary mt-1 shrink-0'
 											aria-hidden='true'
