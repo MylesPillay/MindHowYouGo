@@ -15,7 +15,6 @@ interface TextBoxProps {
 	headingSize?: string;
 	className?: string;
 	children?: React.ReactNode;
-	icon?: string;
 }
 
 const TextBox = ({
@@ -25,8 +24,7 @@ const TextBox = ({
 	heading = "",
 	headingSize = "text-xl",
 	children,
-	className,
-	icon
+	className
 }: TextBoxProps) => {
 	const isLightVariant =
 		variant.includes("light") ||
@@ -53,27 +51,14 @@ const TextBox = ({
 				`}>
 				<div
 					className={`
-						flex flex-col ${icon || heading ? "p-4" : "px-6 py-3"}
+						flex flex-col ${heading ? "p-4" : "px-6 py-3"}
 						${isBorderVariant && variant !== "border-active" ? "" : "bg-white"}
 						rounded-lg border-2 border-opacity-55
 						${isLightVariant ? "border-primary-foreground" : "border-primary"}
 						${variant === "dark" ? "bg-zinc-100" : ""}
 					`}>
-					{(icon || heading) && (
+					{heading && (
 						<div className='flex flex-row items-center justify-between w-full mb-2'>
-							{icon && (
-								<Image
-									src={`/assets/icons/${icon}.png`}
-									alt={icon}
-									width={40}
-									height={40}
-									className={`mr-4 transition-all duration-300 ${
-										variant.includes("active")
-											? "opacity-100 scale-110"
-											: "opacity-60"
-									}`}
-								/>
-							)}
 							{heading && (
 								<h3
 									className={`font-light text-primary-secondary ${headingSize}`}>

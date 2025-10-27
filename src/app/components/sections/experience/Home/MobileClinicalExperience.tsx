@@ -142,7 +142,7 @@ const MobileClinicalExperience = (): JSX.Element => {
 								className='cursor-pointer '
 								aria-label={`Select ${svc.category}`}>
 								<Image
-									src={`/assets/icons/${svc.icon}.png`}
+									src={svc.icon}
 									alt={`${svc.category} icon`}
 									width={active ? 60 : 50}
 									height={active ? 60 : 50}

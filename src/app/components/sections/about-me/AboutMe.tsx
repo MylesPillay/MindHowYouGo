@@ -83,7 +83,7 @@ const AboutMe = ({ id }: { id: string }) => {
 					</div>
 					<div className='w-80 h-80 rounded-full overflow-hidden relative flex items-center align-self-start justify-center mt-16 -ml-16'>
 						<Image
-							src='/assets/images/Kiran.jpg'
+							src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/Kiran.jpg'
 							alt='Photo of me: Kiran Sharma'
 							fill
 							sizes='400px'

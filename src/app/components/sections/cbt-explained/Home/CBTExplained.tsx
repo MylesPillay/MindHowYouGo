@@ -213,7 +213,7 @@ const CBTExplained = ({ abridged = false }: CBTExplainedProps) => {
 							abridged ? "hidden" : "flex"
 						} w-full justify-center align-middle items-center px-20`}>
 						<Image
-							src='/assets/images/cabotTower.png'
+							src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/cabotTower.png'
 							alt='Company logo'
 							width={600}
 							height={720}

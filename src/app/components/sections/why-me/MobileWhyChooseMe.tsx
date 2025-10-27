@@ -252,7 +252,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 								: "opacity-0 translate-y-2 scale-[0.98]"
 						].join(" ")}>
 						<Image
-							src='/assets/images/BABCP-logo.webp'
+							src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/BABCP-logo.webp'
 							alt='BABCP accreditation logo'
 							width={150}
 							height={90}

@@ -219,7 +219,7 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 							: "translate-x-24"
 					].join(" ")}>
 					<Image
-						src='/assets/images/Kiran.jpg'
+						src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/Kiran.jpg'
 						alt='Photo of me: Kiran Sharma'
 						fill
 						sizes='(max-width: 640px) 60vw, 384px'

@@ -151,7 +151,7 @@ const ClinicalExperience = () => {
 											: "bg-white hover:bg-zinc-50"
 									}`}>
 									<Image
-										src={`/assets/icons/${cat.icon}.png`}
+										src={cat.icon}
 										alt={`${cat.category} icon`}
 										width={48}
 										height={48}

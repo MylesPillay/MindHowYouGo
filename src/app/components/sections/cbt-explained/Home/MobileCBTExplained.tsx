@@ -371,7 +371,7 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 						].join(" ")}>
 						<div className='relative w-72 h-80 overflow-hidden rounded-2xl shadow-sm'>
 							<Image
-								src='/assets/images/cabotTower.png'
+								src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/cabotTower.png'
 								alt='Cabot Tower'
 								fill
 								sizes='288px'

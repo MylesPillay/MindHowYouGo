@@ -140,10 +140,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 								<div className='w-full md:w-[20%] rounded-2xl text-primary font-semibold text-3xl justify-around items-center self-center'>
 									<Image
 										className='m-auto h-[140px] w-[180px]'
-										src={
-											whyChooseMeContent.accreditation
-												.logo.src
-										}
+										src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/BABCP-logo.webp'
 										alt={
 											whyChooseMeContent.accreditation
 												.logo.alt

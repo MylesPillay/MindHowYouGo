@@ -66,7 +66,7 @@ export default function DesktopNav({
 				<Logo items={items} className='z-50' />
 				<Image
 					className='flex justify-end place-self-end bg-white/20 p-1 rounded-md mb-1'
-					src={badgeImageSrc}
+					src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/BABCP-logo.webp'
 					alt='BABCP accreditation badge'
 					width={70}
 					height={50}

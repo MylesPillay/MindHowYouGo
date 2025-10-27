@@ -220,7 +220,7 @@ const MobileHeroSection: React.FC = () => {
 								: "opacity-0 translate-y-3 scale-[0.98]"
 						].join(" ")}>
 						<Image
-							src='/assets/images/companyLogo.png'
+							src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/companyLogoOptimized.png'
 							alt='Company logo'
 							width={420}
 							height={460}
