@@ -6,9 +6,6 @@ declare global {
 }
 
 export function getSupabaseBrowser(): SupabaseClient {
-  if (typeof window === "undefined") {
-    throw new Error("getSupabaseBrowser() called on the server");
-  }
 
   if (globalThis.__supabase__) return globalThis.__supabase__;
 
