@@ -60,12 +60,12 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 		}));
 
 	return (
-		<div className='flex flex-col items-center w-full pt-20 px-4 md:px-16'>
-			<AnimatedSectionTitle title='What People Say' className='pl-28' />
+		<div className='flex flex-col items-center w-full pt-20 px-4 md:px-0'>
+			<AnimatedSectionTitle title='What People Say' className='pl-20' />
 
 			<div
 				id={id}
-				className='relative grid grid-cols-1 md:grid-cols-2 gap-16 w-full max-w-7xl mt-20 py-10'>
+				className='relative grid grid-cols-1 md:grid-cols-2 gap-16 w-[90%] max-w-5xl mt-20 py-10'>
 				{testimonials.map((testimonial, idx) => (
 					<div key={idx} className='group relative w-full h-full'>
 						{/* Collapsed Card (default visible) */}

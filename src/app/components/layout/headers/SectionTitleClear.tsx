@@ -27,7 +27,7 @@ const SectionTitleClear: React.FC<SectionTitleClearProps> = ({
 					? "bg-opacity-65 bg-gradient-to-r from-primary/65 to-yellow-100/20"
 					: "bg-primary-secondary bg-opacity-65"
 			}`}>
-			<div className='my-1 w-full h-auto flex flex-grow'>
+			<div className='my-1 w-full h-auto flex flex-grow text-3xl  md:text-4xl lg:text-5xl'>
 				<h3
 					style={{
 						letterSpacing: 1,
@@ -35,7 +35,7 @@ const SectionTitleClear: React.FC<SectionTitleClearProps> = ({
 							? undefined
 							: mobileScreen
 							? "1.5rem"
-							: "2.6rem"
+							: ""
 					}}>
 					<span
 						className={`text-white font-light ${

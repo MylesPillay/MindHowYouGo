@@ -52,7 +52,8 @@ export default async function Home() {
 			<div className='sm:hidden flex'>
 				<MobileHeroSection />
 			</div>
-			<div className='sm:flex hidden'>
+			<div className='sm:flex flex-col hidden'>
+				<SectionTitleClear title={`About Me`} />
 				<AboutMe id='about-me' />
 			</div>
 			<div className='sm:hidden flex'>

@@ -119,7 +119,7 @@ const ClinicalExperience = () => {
 					</span>
 				</p>
 
-				<div className='flex flex-col sm:flex-row w-[90%] max-w-[1100px] border-2 border-primary rounded-xl overflow-hidden shadow-sm my-10'>
+				<div className='flex flex-col sm:flex-row w-[90%] max-w-5xl border-2 border-primary rounded-xl overflow-hidden shadow-sm my-10'>
 					{/* Left: Tablist */}
 					<div
 						className='flex flex-col w-auto xl:min-w-[40%] lg:min-w-[50%] md:min-w-[42%] sm:min-w-[40%] border-r-2 border-primary'

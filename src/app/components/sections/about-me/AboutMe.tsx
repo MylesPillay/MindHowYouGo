@@ -69,7 +69,6 @@ const AboutMe = ({ id }: { id: string }) => {
 			<div
 				id={id}
 				className='flex flex-col w-full h-auto pb-20 justify-evenly align-middle items-center mx-auto'>
-				<SectionTitleClear title={aboutMeContent.title} />
 				<div className='flex md:flex-row flex-col-reverse md:w-[100%] w-[80%] h-auto justify-evenly align-middle items-center pt-20'>
 					<div className='flex flex-col w-auto'>
 						<h1 className='flex w-full justify-center text-primary-foreground text-5xl mb-8 font-light'>
