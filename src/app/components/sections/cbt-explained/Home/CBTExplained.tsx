@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import TextBox from "../../../layout/containers/TextBox";
 import AnimatedSectionTitle from "@/app/components/layout/headers/AnimatedTitle";
 import Image from "next/image";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
 import { LoadingBlock } from "@/app/components/layout/loading/LoadingBlock";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface ContentDataType {
 	section_title: string;
@@ -41,6 +41,7 @@ const CBTExplained = ({ abridged = false }: CBTExplainedProps) => {
 	const [content, setContent] = useState<ContentDataType | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [_fadeIn, setFadeIn] = useState(false);
+	const supabase = useSupabaseClient();
 
 	React.useEffect(() => {
 		if (!loading) {
@@ -51,7 +52,6 @@ const CBTExplained = ({ abridged = false }: CBTExplainedProps) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = getSupabaseBrowser();
 			const { data, error } = await supabase
 				.from("content_cbt_text_blocks")
 				.select("*");

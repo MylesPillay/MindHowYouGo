@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
 
 type HeroData = {
@@ -34,6 +34,7 @@ const HeroSection = () => {
 	const [initialHero, setInitialHero] = useState<HeroData | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [fadeIn, setFadeIn] = useState(false);
+	const supabase = useSupabaseClient();
 
 	useEffect(() => {
 		if (!loading) {
@@ -48,7 +49,6 @@ const HeroSection = () => {
 		const fetchHero = async (retry = false) => {
 			let didRetry = false;
 			try {
-				const supabase = getSupabaseBrowser();
 				const result = await fetchWithTimeout(
 					Promise.resolve(
 						supabase.from("content_hero_section").select("*")

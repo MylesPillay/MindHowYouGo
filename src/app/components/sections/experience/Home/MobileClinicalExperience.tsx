@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaCheckCircle } from "react-icons/fa";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
 import { LoadingBlock } from "@/app/components/layout/loading/LoadingBlock";
 import SectionTitleClear from "@/app/components/layout/headers/SectionTitleClear";
 import dynamic from "next/dynamic";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export interface ClinicalExperienceRow {
 	category: string;
@@ -29,6 +29,7 @@ const MobileClinicalExperience = (): JSX.Element => {
 	const [textBlocks, setTextBlocks] =
 		useState<ClinicalExperienceTextBlock | null>(null);
 	const [loading, setLoading] = useState(true);
+	const supabase = useSupabaseClient();
 
 	// basic reduced-motion check
 	const prefersReduced =
@@ -39,7 +40,6 @@ const MobileClinicalExperience = (): JSX.Element => {
 		let didCancel = false;
 		(async () => {
 			try {
-				const supabase = getSupabaseBrowser();
 				const { data: clinicData, error: clinicErr } = await supabase
 					.from("content_clinic")
 					.select("*")

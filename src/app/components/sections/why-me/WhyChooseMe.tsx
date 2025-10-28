@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import TextBox from "../../layout/containers/TextBox";
 import Image from "next/image";
 import SectionTitleClear from "../../layout/headers/SectionTitleClear";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface ContentDataType {
 	section_title: string;
@@ -26,6 +26,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 	const [content, setContent] = useState<ContentDataType | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [_fadeIn, setFadeIn] = useState(false);
+	const supabase = useSupabaseClient();
 
 	React.useEffect(() => {
 		if (!loading) {
@@ -36,7 +37,6 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = getSupabaseBrowser();
 			const { data, error } = await supabase
 				.from("content_why_me")
 				.select("*");
@@ -63,7 +63,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 		accreditation: {
 			withLogo: true,
 			logo: {
-				src: "/assets/images/BABCP-logo.webp",
+				src: "https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/BABCP-logo.webp",
 				alt: "BABCP accreditation logo",
 				width: 220,
 				height: 90
@@ -140,7 +140,10 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 								<div className='w-full md:w-[20%] rounded-2xl text-primary font-semibold text-3xl justify-around items-center self-center'>
 									<Image
 										className='m-auto h-[140px] w-[180px]'
-										src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/BABCP-logo.webp'
+										src={
+											whyChooseMeContent.accreditation
+												.logo.src
+										}
 										alt={
 											whyChooseMeContent.accreditation
 												.logo.alt

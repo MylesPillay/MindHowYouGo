@@ -4,8 +4,8 @@ import React, { useRef, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
 import { LoadingBlock } from "@/app/components/layout/loading/LoadingBlock";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export interface ClinicalExperienceRow {
 	category: string;
@@ -35,11 +35,11 @@ const ClinicalExperience = () => {
 		{} as ClinicalExperienceTextBlock
 	);
 	const [content, setContent] = useState<ClinicalExperienceRow[]>([]);
+	const supabase = useSupabaseClient();
 	const tabsRef = useRef<Array<HTMLButtonElement | null>>([]);
 
 	React.useEffect(() => {
 		const fetchContent = async () => {
-			const supabase = getSupabaseBrowser();
 			const { data: content, error } = await supabase
 				.from("content_clinic")
 				.select("*");

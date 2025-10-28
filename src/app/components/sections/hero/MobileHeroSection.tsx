@@ -7,9 +7,9 @@ import React, {
 	useCallback
 } from "react";
 import Image from "next/image";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
 import dynamic from "next/dynamic";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 type HeroData = {
 	company_name: string | null;
@@ -40,6 +40,7 @@ const MobileHeroSection: React.FC = () => {
 	const [animateGlow, setAnimateGlow] = useState(true);
 	const [initialHero, setInitialHero] = useState<HeroData | null>(null);
 	const [loading, setLoading] = useState(true);
+	const supabase = useSupabaseClient();
 
 	// staged animation flags (one-time)
 	const [frameVisible, setFrameVisible] = useState(false);
@@ -70,7 +71,6 @@ const MobileHeroSection: React.FC = () => {
 		const fetchHero = async (retry = false) => {
 			let didRetry = false;
 			try {
-				const supabase = getSupabaseBrowser();
 				const result = await fetchWithTimeout(
 					Promise.resolve(
 						supabase.from("content_hero_section").select("*")

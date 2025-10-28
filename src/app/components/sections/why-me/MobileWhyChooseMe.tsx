@@ -3,14 +3,14 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import SectionTitleClear from "../../layout/headers/SectionTitleClear";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
 import dynamic from "next/dynamic";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface ContentDataType {
 	section_title: string;
-	text_block_1: string; // CBT body
-	text_block_2: string; // accreditation body
+	text_block_1: string;
+	text_block_2: string;
 	legal_text_slice_1: string;
 	legal_text_slice_2: string;
 	legal_text_slice_3: string;
@@ -26,8 +26,8 @@ interface WhyChooseMeProps {
 const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 	const [content, setContent] = useState<ContentDataType | null>(null);
 	const [loading, setLoading] = useState(true);
+	const supabase = useSupabaseClient();
 
-	// one-time cascade flags
 	const startedRef = useRef(false);
 	const timeoutsRef = useRef<number[]>([]);
 	const titleRef = useRef<HTMLDivElement | null>(null);
@@ -38,12 +38,10 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 	const [showLogo, setShowLogo] = useState(false);
 	const [showCallout, setShowCallout] = useState(false);
 
-	// fetch content
 	useEffect(() => {
 		let didCancel = false;
 		(async () => {
 			try {
-				const supabase = getSupabaseBrowser();
 				const { data, error } = await supabase
 					.from("content_why_me")
 					.select("*")
@@ -137,13 +135,13 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 					window.setTimeout(() => setShowLegal(true), 140)
 				);
 				timeoutsRef.current.push(
-					window.setTimeout(() => setShowAccBody(true), 280)
+					window.setTimeout(() => setShowAccBody(true), 150)
 				);
 				timeoutsRef.current.push(
-					window.setTimeout(() => setShowLogo(true), 420)
+					window.setTimeout(() => setShowLogo(true), 160)
 				);
 				timeoutsRef.current.push(
-					window.setTimeout(() => setShowCallout(true), 560)
+					window.setTimeout(() => setShowCallout(true), 170)
 				);
 			}
 		};

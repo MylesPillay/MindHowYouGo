@@ -7,15 +7,12 @@ import {
 	finalColorStr,
 	initialColorStr
 } from "@/utils/helpers/appearance/scrollColorBG";
-// import { NAV_ITEMS } from "./DesktopMenu";
-// import MobileMenu from "./MobileNav";
 
 export default function ClientRoot({
 	children
 }: {
 	children: React.ReactNode;
 }) {
-	// const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [bgColor, setBgColor] = useState(initialColorStr);
 	useEffect(() => {
 		return attachScrollColor({
@@ -27,10 +24,7 @@ export default function ClientRoot({
 		});
 	}, [setBgColor]);
 
-	const supabase = useMemo(() => {
-		if (typeof window === "undefined") return null;
-		return getSupabaseBrowser();
-	}, []);
+	const supabase = getSupabaseBrowser();
 
 	if (!supabase)
 		return <main className='relative w-screen flex-1'>{children}</main>;

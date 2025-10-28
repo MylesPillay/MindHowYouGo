@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../../../layout/buttons/Button";
 import React, { useEffect, useRef, useState } from "react";
 import SectionTitleClear from "../../../layout/headers/SectionTitleClear";
-import { insertContact, IFormInput } from "./hooks/handleInsertContact";
+import { useInsertContact, IFormInput } from "./hooks/useInsertContact";
 
 const MobileContactForm = ({ id }: { id: string }): JSX.Element => {
 	const {
@@ -18,6 +18,8 @@ const MobileContactForm = ({ id }: { id: string }): JSX.Element => {
 		"success" | "error" | "no_data" | null
 	>(null);
 	const [statusMsg, setStatusMsg] = useState<string>("");
+
+	const insertContact = useInsertContact();
 
 	const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
 		setSubmissionStatus(null);

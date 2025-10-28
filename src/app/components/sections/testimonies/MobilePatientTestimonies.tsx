@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import SectionTitleClear from "../../layout/headers/SectionTitleClear";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface ContentDataTypeRow {
 	testimony_name?: string;
@@ -18,6 +18,7 @@ const PEEK_FRACTION = 0.35;
 const MobilePatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 	const [content, setContent] = useState<Testimonial[]>([]);
 	const [loading, setLoading] = useState(true);
+	const supabase = useSupabaseClient();
 
 	// which card is aligned/snap-focused
 	const [activeIndex, setActiveIndex] = useState(0);
@@ -37,7 +38,6 @@ const MobilePatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 	// Fetch data
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = getSupabaseBrowser();
 			const { data, error } = await supabase
 				.from("content_testimonials")
 				.select("*");

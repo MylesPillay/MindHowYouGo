@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import AnimatedSectionTitle from "../../layout/headers/AnimatedTitle";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
-
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 interface ContentDataTypeRow {
 	testimony_name?: string;
 	testimony_description?: string;
@@ -16,6 +15,7 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 	const [content, setContent] = useState<ContentDataType>([]);
 	const [loading, setLoading] = useState(true);
 	const [_fadeIn, setFadeIn] = useState(false);
+	const supabase = useSupabaseClient();
 
 	React.useEffect(() => {
 		if (!loading) {
@@ -26,7 +26,6 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = getSupabaseBrowser();
 			const { data, error } = await supabase
 				.from("content_testimonials")
 				.select("*");

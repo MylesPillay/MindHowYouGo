@@ -3,8 +3,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import SectionTitleClear from "@/app/components/layout/headers/SectionTitleClear";
 import { LoadingBlock } from "@/app/components/layout/loading/LoadingBlock";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
 import dynamic from "next/dynamic";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface ContentDataType {
 	section_title: string;
@@ -40,6 +40,7 @@ interface MobileCBTExplainedProps {
 const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 	const [content, setContent] = useState<ContentDataType | null>(null);
 	const [loading, setLoading] = useState(true);
+	const supabase = useSupabaseClient();
 
 	// one-time trigger + stagger flags
 	const startedRef = useRef(false);
@@ -64,7 +65,6 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 		let didCancel = false;
 		(async () => {
 			try {
-				const supabase = getSupabaseBrowser();
 				const { data, error } = await supabase
 					.from("content_cbt_text_blocks")
 					.select("*")
@@ -186,24 +186,24 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 			// Staggered sequence
 			setL1(true);
 			timeoutsRef.current.push(window.setTimeout(() => setL2(true), 120));
-			timeoutsRef.current.push(window.setTimeout(() => setP1(true), 220));
-			timeoutsRef.current.push(window.setTimeout(() => setP2(true), 320));
-			timeoutsRef.current.push(window.setTimeout(() => setP3(true), 420));
-			timeoutsRef.current.push(window.setTimeout(() => setP4(true), 520));
+			timeoutsRef.current.push(window.setTimeout(() => setP1(true), 130));
+			timeoutsRef.current.push(window.setTimeout(() => setP2(true), 140));
+			timeoutsRef.current.push(window.setTimeout(() => setP3(true), 150));
+			timeoutsRef.current.push(window.setTimeout(() => setP4(true), 160));
 			timeoutsRef.current.push(
-				window.setTimeout(() => setWtTitle(true), 620)
+				window.setTimeout(() => setWtTitle(true), 170)
 			);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setWt1(true), 720)
+				window.setTimeout(() => setWt1(true), 180)
 			);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setWt2(true), 820)
+				window.setTimeout(() => setWt2(true), 190)
 			);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setImgVisible(true), 900)
+				window.setTimeout(() => setImgVisible(true), 200)
 			);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setWt3(true), 980)
+				window.setTimeout(() => setWt3(true), 210)
 			);
 		};
 

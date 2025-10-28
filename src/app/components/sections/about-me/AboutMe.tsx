@@ -4,7 +4,7 @@ import Image from "next/image";
 import TextBox from "../../layout/containers/TextBox";
 import SectionTitleClear from "../../layout/headers/SectionTitleClear";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface ContentDataType {
 	section_title: string;
@@ -19,6 +19,7 @@ const AboutMe = ({ id }: { id: string }) => {
 	const [content, setContent] = useState<ContentDataType | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [_fadeIn, setFadeIn] = useState(false);
+	const supabase = useSupabaseClient();
 
 	React.useEffect(() => {
 		if (!loading) {
@@ -29,7 +30,6 @@ const AboutMe = ({ id }: { id: string }) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = getSupabaseBrowser();
 			const { data, error } = await supabase
 				.from("content_about_me")
 				.select("*");
@@ -70,18 +70,18 @@ const AboutMe = ({ id }: { id: string }) => {
 				id={id}
 				className='flex flex-col w-full h-auto pb-20 justify-evenly align-middle items-center mx-auto'>
 				<SectionTitleClear title={aboutMeContent.title} />
-				<div className='flex flex-row w-[100%] h-auto justify-evenly align-middle items-center pt-20'>
+				<div className='flex md:flex-row flex-col-reverse md:w-[100%] w-[80%] h-auto justify-evenly align-middle items-center pt-20'>
 					<div className='flex flex-col w-auto'>
-						<h1 className='flex w-full justify-center   text-primary-foreground lg:text-5xl mb-8 font-light'>
+						<h1 className='flex w-full justify-center text-primary-foreground text-5xl mb-8 font-light'>
 							{aboutMeContent.intro}
 						</h1>
 						<TextBox
 							text={aboutMeContent.body}
 							variant='light'
-							textSize='text-xl'
+							textSize='lg:text-xl text-md'
 						/>
 					</div>
-					<div className='w-80 h-80 rounded-full overflow-hidden relative flex items-center align-self-start justify-center mt-16 -ml-16'>
+					<div className='lg:w-80 lg:h-80  w-72 h-72 rounded-full overflow-hidden relative flex items-center align-self-start justify-center md:mt-16 mt-0  md:mb-0 mb-16 md:-ml-16 ml-0'>
 						<Image
 							src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/Kiran.jpg'
 							alt='Photo of me: Kiran Sharma'

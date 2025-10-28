@@ -9,7 +9,6 @@ import React, {
 import Image from "next/image";
 import SectionTitleClear from "../../layout/headers/SectionTitleClear";
 import { LoadingBlock } from "../../layout/loading/LoadingBlock";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
 
 interface ContentDataType {
 	section_title: string;
@@ -23,6 +22,7 @@ interface ContentDataType {
 const MobileAboutMe = ({ id }: { id: string }) => {
 	const [content, setContent] = useState<ContentDataType | null>(null);
 	const [loading, setLoading] = useState(true);
+	const supabase = useSupabaseClient();
 
 	// one-time flags
 	const [hasAnimated, setHasAnimated] = useState(false);
@@ -66,7 +66,6 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 		let didCancel = false;
 		(async () => {
 			try {
-				const supabase = getSupabaseBrowser();
 				const { data, error } = await supabase
 					.from("content_about_me")
 					.select(
@@ -136,16 +135,16 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 			}
 			setHiVisible(true);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setImageVisible(true), 200)
+				window.setTimeout(() => setImageVisible(true), 120)
 			);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setImVisible(true), 280)
+				window.setTimeout(() => setImVisible(true), 130)
 			);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setNameVisible(true), 300)
+				window.setTimeout(() => setNameVisible(true), 140)
 			);
 			timeoutsRef.current.push(
-				window.setTimeout(() => setMainTextVisible(true), 450)
+				window.setTimeout(() => setMainTextVisible(true), 150)
 			);
 			setHasAnimated(true);
 		};
@@ -162,7 +161,7 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 			},
 			{
 				root: null,
-				rootMargin: "-50% 0px -50% 0px", // central band
+				rootMargin: "-50% 0px -50% 0px",
 				threshold: 0
 			}
 		);
@@ -175,7 +174,7 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 			timeoutsRef.current.forEach((t) => clearTimeout(t));
 			timeoutsRef.current = [];
 		};
-	}, [content]); // <-- no hasAnimated here
+	}, [content]);
 
 	if (loading || !content) return <LoadingBlock />;
 
@@ -295,6 +294,7 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 };
 
 import dynamic from "next/dynamic";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 // Export AFTER definition to avoid hydration quirks
 export default dynamic(() => Promise.resolve(MobileAboutMe), { ssr: false });
 export { MobileAboutMe };

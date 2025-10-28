@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../../../layout/buttons/Button";
 import { useState } from "react";
 import ServicesTitleClear from "@/app/components/layout/headers/Services/ServicesTitleClear";
-import { insertContact } from "../Home/hooks/handleInsertContact";
+import { useInsertContact } from "../Home/hooks/useInsertContact";
 
 interface IFormInput {
 	contact_name: string;
@@ -25,12 +25,14 @@ const ServicesContactForm = ({ id }: { id?: string }): JSX.Element => {
 		"success" | "error" | "no_data" | null
 	>(null);
 	const [statusMsg, setStatusMsg] = useState<string>("");
+	const insertContact = useInsertContact();
 
 	const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
 		setSubmissionStatus(null);
 		setStatusMsg("");
+
 		try {
-			await insertContact(formData);
+			insertContact(formData);
 
 			setSubmissionStatus("success");
 			setStatusMsg(

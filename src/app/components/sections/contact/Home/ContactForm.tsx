@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../../../layout/buttons/Button";
 import { useState } from "react";
 import AnimatedSectionTitle from "../../../layout/headers/AnimatedTitle";
-import { insertContact, IFormInput } from "./hooks/handleInsertContact";
+import { useInsertContact, IFormInput } from "./hooks/useInsertContact";
 
 const ContactForm = ({ id }: { id: string }): JSX.Element => {
 	const {
@@ -18,6 +18,8 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 		"success" | "error" | "no_data" | null
 	>(null);
 	const [statusMsg, setStatusMsg] = useState<string>("");
+
+	const insertContact = useInsertContact();
 
 	const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
 		setSubmissionStatus(null);
@@ -51,19 +53,6 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 				className='pl-6'
 				mobileScreen
 			/>
-			<p
-				id={statusId}
-				role='status'
-				aria-live='polite'
-				className={`mt-4 text-center text-base ${
-					submissionStatus === "success"
-						? "text-green-700"
-						: submissionStatus === "error"
-						? "text-red-700"
-						: "text-primary-secondary"
-				}`}>
-				{statusMsg}
-			</p>
 
 			<form
 				className='flex flex-col justify-center w-[85%] mt-10'
@@ -225,6 +214,20 @@ const ContactForm = ({ id }: { id: string }): JSX.Element => {
 						{isSubmitting ? "Sending…" : "Book an Intro Call"}
 					</Button>
 				</div>
+
+				<p
+					id={statusId}
+					role='status'
+					aria-live='polite'
+					className={`my-4 text-center text-base ${
+						submissionStatus === "success"
+							? "text-green-700"
+							: submissionStatus === "error"
+							? "text-red-700"
+							: "text-primary-secondary"
+					}`}>
+					{statusMsg}
+				</p>
 
 				{/* Success pill */}
 				{submissionStatus === "success" && (

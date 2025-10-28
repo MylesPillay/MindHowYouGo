@@ -1,20 +1,21 @@
 "use client";
 import { LoadingBlock } from "../components/layout/loading/LoadingBlock";
-import { getSupabaseBrowser } from "@/utils/api/supabase";
+
 import React, { useEffect, useState } from "react";
 import {
 	PrivacyContent,
 	PrivacyNotice
 } from "../components/sections/privacy/PrivacyContent";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function PrivacyPage() {
 	const [content, setContent] = useState<PrivacyContent | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [fadeIn, setFadeIn] = useState(false);
+	const supabase = useSupabaseClient();
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const supabase = getSupabaseBrowser();
 			const { data, error } = await supabase
 				.from("content_privacy_notice")
 				.select("*");
