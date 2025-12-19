@@ -188,7 +188,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 			}}
 			aria-labelledby={abridged ? undefined : "why-title"}>
 			{!abridged && (
-				<div className='w-full max-w-md -ml-20 mb-10' ref={titleRef}>
+				<div className='w-[130%] mb-10' ref={titleRef}>
 					<SectionTitleClear
 						id='why-title'
 						title={view.title}
@@ -198,7 +198,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 			)}
 
 			{/* Intro (CBT) */}
-			<div className='w-full max-w-sm text-left'>
+			<div className='w-full max-w-md text-left'>
 				<p
 					className={[
 						"text-primary-secondary text-lg leading-relaxed",
@@ -213,7 +213,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 
 			{/* Legal clarity */}
 			{!abridged && (
-				<div className='w-full max-w-sm text-left mt-6'>
+				<div className='w-full max-w-md text-left mt-6'>
 					<p
 						className={[
 							"text-primary-secondary text-lg leading-relaxed",
@@ -229,7 +229,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 
 			{/* Accreditation text + logo */}
 			{!abridged && (
-				<div className='w-full max-w-sm text-left mt-8'>
+				<div className='w-full max-w-md text-left mt-8'>
 					<p
 						className={[
 							"text-primary-secondary text-lg leading-relaxed",
@@ -263,7 +263,7 @@ const WhyChooseMe = ({ abridged = false }: WhyChooseMeProps) => {
 
 			{/* Final callout (link scroll to testimonies) */}
 			{!abridged && (
-				<div className='w-full max-w-sm text-left mt-8'>
+				<div className='w-full max-w-md text-left mt-8'>
 					<p
 						className={[
 							"text-primary-secondary text-lg leading-relaxed",

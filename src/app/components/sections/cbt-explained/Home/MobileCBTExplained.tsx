@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import SectionTitleClear from "@/app/components/layout/headers/SectionTitleClear";
 import { LoadingBlock } from "@/app/components/layout/loading/LoadingBlock";
-import dynamic from "next/dynamic";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface ContentDataType {
@@ -35,9 +34,13 @@ interface ContentDataType {
 
 interface MobileCBTExplainedProps {
 	abridged?: boolean;
+	unanimated?: boolean;
 }
 
-const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
+const MobileCBTExplained = ({
+	abridged = false,
+	unanimated = false
+}: MobileCBTExplainedProps) => {
 	const [content, setContent] = useState<ContentDataType | null>(null);
 	const [loading, setLoading] = useState(true);
 	const supabase = useSupabaseClient();
@@ -47,19 +50,20 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 	const timeoutsRef = useRef<number[]>([]);
 	const titleRef = useRef<HTMLDivElement | null>(null);
 
-	const [l1, setL1] = useState(false); // top line 1
-	const [l2, setL2] = useState(false); // top line 2
-	const [p1, setP1] = useState(false); // therapy para 1 (always shown in non-abridged top block previously)
-	const [p2, setP2] = useState(false);
-	const [p3, setP3] = useState(false);
-	const [p4, setP4] = useState(false);
+	// If unanimated === true, everything starts "visible"
+	const [l1, setL1] = useState(unanimated);
+	const [l2, setL2] = useState(unanimated);
+	const [p1, setP1] = useState(unanimated);
+	const [p2, setP2] = useState(unanimated);
+	const [p3, setP3] = useState(unanimated);
+	const [p4, setP4] = useState(unanimated);
 
-	const [wtTitle, setWtTitle] = useState(false);
-	const [wt1, setWt1] = useState(false);
-	const [wt2, setWt2] = useState(false);
-	const [wt3, setWt3] = useState(false);
+	const [wtTitle, setWtTitle] = useState(unanimated);
+	const [wt1, setWt1] = useState(unanimated);
+	const [wt2, setWt2] = useState(unanimated);
+	const [wt3, setWt3] = useState(unanimated);
 
-	const [imgVisible, setImgVisible] = useState(false);
+	const [imgVisible, setImgVisible] = useState(unanimated);
 
 	useEffect(() => {
 		let didCancel = false;
@@ -82,7 +86,7 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 		return () => {
 			didCancel = true;
 		};
-	}, []);
+	}, [supabase]);
 
 	// Build the strings once
 	const view = useMemo(() => {
@@ -154,9 +158,11 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 		};
 	}, [content]);
 
-	// Trigger animations when title hits the central band (one-time)
+	// Trigger animations when title hits viewport (one-time) — skips when unanimated
 	useEffect(() => {
+		if (unanimated) return; // 🚫 animation disabled for this use
 		if (!content || startedRef.current) return;
+
 		const prefersReduced =
 			typeof window !== "undefined" &&
 			window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -207,6 +213,17 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 			);
 		};
 
+		// ✅ 1) If it's already in the viewport when content loads, start immediately
+		const rect = el.getBoundingClientRect();
+		const vh =
+			window.innerHeight || document.documentElement.clientHeight || 0;
+
+		if (rect.top < vh && rect.bottom > 0) {
+			kickOff();
+			return; // no need for observer
+		}
+
+		// ✅ 2) Otherwise, watch it entering the viewport (no weird central band)
 		const io = new IntersectionObserver(
 			(entries) => {
 				for (const e of entries) {
@@ -219,8 +236,8 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 			},
 			{
 				root: null,
-				rootMargin: "-50% 0px -50% 0px", // central band
-				threshold: 0
+				rootMargin: "0px 0px -15% 0px", // small bottom margin so it fires slightly before fully central
+				threshold: 0.1
 			}
 		);
 
@@ -230,19 +247,19 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 			timeoutsRef.current.forEach((t) => clearTimeout(t));
 			timeoutsRef.current = [];
 		};
-	}, [content]);
+	}, [content, unanimated]);
 
 	if (loading || !content || !view) return <LoadingBlock />;
 
 	return (
 		<section
-			className='relative w-full bg-background px-5 pt-14 pb-10 flex flex-col items-center'
+			className='relative w-full px-5 pt-14 pb-10 flex flex-col items-center'
 			style={{
 				paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)"
 			}}
 			aria-labelledby='cbt-title'>
 			{/* Title (observer target) */}
-			<div className='w-[110%] max-w-md -ml-20 mb-10' ref={titleRef}>
+			<div className='w-[130%] mb-20' ref={titleRef}>
 				<SectionTitleClear
 					id='cbt-title'
 					title={view.title}
@@ -251,7 +268,7 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 			</div>
 
 			{/* Top two lines (text-only) */}
-			<div className='w-full max-w-sm text-left space-y-2'>
+			<div className='w-full max-w-md text-left space-y-2'>
 				<p
 					className={[
 						"text-2xl text-primary-foreground text-pretty",
@@ -275,8 +292,7 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 			</div>
 
 			{/* Therapy with me (render fewer if abridged) */}
-			<div className='w-full max-w-sm text-left mt-6 space-y-4'>
-				{/* p1 appears even if abridged previously lived in a box; here it’s text */}
+			<div className='w-full max-w-md text-left mt-6 space-y-4'>
 				{!abridged && (
 					<p
 						className={[
@@ -324,43 +340,42 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 				</p>
 			</div>
 
-			{/* Walk & Talk */}
-			<div className='w-full max-w-sm text-left mt-10 space-y-4'>
-				<h3
-					className={[
-						"text-2xl font-medium text-primary tracking-tight",
-						"transform transition-all duration-700 ease-out will-change-transform",
-						wtTitle
-							? "opacity-100 translate-y-0"
-							: "opacity-0 translate-y-2"
-					].join(" ")}>
-					Walk &amp; Talk
-				</h3>
+			{abridged && (
+				<div className='w-full max-w-md text-left mt-10 space-y-4'>
+					<h3
+						className={[
+							"text-2xl font-medium text-primary tracking-tight",
+							"transform transition-all duration-700 ease-out will-change-transform",
+							wtTitle
+								? "opacity-100 translate-y-0"
+								: "opacity-0 translate-y-2"
+						].join(" ")}>
+						Walk &amp; Talk
+					</h3>
 
-				<p
-					className={[
-						"text-primary-secondary text-lg leading-relaxed",
-						"transform transition-all duration-700 ease-out will-change-transform",
-						wt1
-							? "opacity-100 translate-y-0"
-							: "opacity-0 translate-y-2"
-					].join(" ")}>
-					{view.w1}
-				</p>
+					<p
+						className={[
+							"text-primary-secondary text-lg leading-relaxed",
+							"transform transition-all duration-700 ease-out will-change-transform",
+							wt1
+								? "opacity-100 translate-y-0"
+								: "opacity-0 translate-y-2"
+						].join(" ")}>
+						{view.w1}
+					</p>
 
-				<p
-					className={[
-						"text-primary-secondary text-lg leading-relaxed",
-						"transform transition-all duration-700 ease-out will-change-transform",
-						wt2
-							? "opacity-100 translate-y-0"
-							: "opacity-0 translate-y-2"
-					].join(" ")}>
-					{view.w2}
-				</p>
+					<p
+						className={[
+							"text-primary-secondary text-lg leading-relaxed",
+							"transform transition-all duration-700 ease-out will-change-transform",
+							wt2
+								? "opacity-100 translate-y-0"
+								: "opacity-0 translate-y-2"
+						].join(" ")}>
+						{view.w2}
+					</p>
 
-				{/* Optional image (kept, but no container UI) */}
-				{!abridged && (
+					{/* Optional image */}
 					<div
 						className={[
 							"w-full flex justify-center my-4",
@@ -381,27 +396,11 @@ const MobileCBTExplained = ({ abridged = false }: MobileCBTExplainedProps) => {
 							/>
 						</div>
 					</div>
-				)}
-
-				{!abridged && (
-					<p
-						className={[
-							"text-primary-secondary text-lg leading-relaxed",
-							"transform transition-all duration-700 ease-out will-change-transform",
-							wt3
-								? "opacity-100 translate-y-0"
-								: "opacity-0 translate-y-2"
-						].join(" ")}>
-						{view.w3}
-					</p>
-				)}
-			</div>
+				</div>
+			)}
 		</section>
 	);
 };
 
-// Export AFTER definition to avoid hydration quirks
-export default dynamic(() => Promise.resolve(MobileCBTExplained), {
-	ssr: false
-});
+export default MobileCBTExplained;
 export { MobileCBTExplained };

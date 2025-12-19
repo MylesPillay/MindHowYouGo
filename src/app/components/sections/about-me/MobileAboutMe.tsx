@@ -201,7 +201,7 @@ const MobileAboutMe = ({ id }: { id: string }) => {
 				paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)"
 			}}>
 			{/* Title wrapper (observer target) */}
-			<div className='w-full max-w-md -ml-20 mb-10' ref={titleWrapRefCb}>
+			<div className='w-[130%] mb-10' ref={titleWrapRefCb}>
 				<SectionTitleClear title={content.section_title} mobileScreen />
 			</div>
 			{/* Image: slides in from right to final -mr-[80%] position */}

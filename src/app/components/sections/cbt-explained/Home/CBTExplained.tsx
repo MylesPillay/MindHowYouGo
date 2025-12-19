@@ -192,41 +192,47 @@ const CBTExplained = ({ abridged = false }: CBTExplainedProps) => {
 							</h3>
 						</>
 					)}
-					<div className='flex w-full justify-center align-middle items-center px-20 mb-10'>
-						<TextBox className='p-2 overflow-hidden justify-center w-full text-center min-w-[73%]'>
-							<AnimatedSectionTitle
-								title='Walk & Talk'
-								className='w-screen -ml-48 -mt-5 text-center pl-[10vw]'
-							/>
-							<h3 className='flex text-center my-8 p-2 text-primary-secondary text-xl font-light self-center'>
-								{cbtExplainedContent.walkAndTalk[1]}
-							</h3>
-							<div className='w-[108%] -ml-8 -mb-4 justify-end bg-zinc-100 border-t-[1.5px] border-zinc-700'>
-								<h3 className='text-primary-secondary font-light text-xl p-8 py-3 justify-center mx-auto max-w-[90%]'>
-									{cbtExplainedContent.walkAndTalk[2]}
-								</h3>
+					{abridged ? (
+						<>
+							<div className='flex w-full justify-center align-middle items-center px-20 mb-10'>
+								<TextBox className='p-2 overflow-hidden justify-center w-full text-center min-w-[73%]'>
+									<AnimatedSectionTitle
+										title='Walk & Talk'
+										className='w-screen -ml-48 -mt-5 text-center pl-[10vw]'
+									/>
+									<h3 className='flex text-center my-8 p-2 text-primary-secondary text-xl font-light self-center'>
+										{cbtExplainedContent.walkAndTalk[1]}
+									</h3>
+									<div className='w-[108%] -ml-8 -mb-4 justify-end bg-zinc-100 border-t-[1.5px] border-zinc-700'>
+										<h3 className='text-primary-secondary font-light text-xl p-8 py-3 justify-center mx-auto max-w-[90%]'>
+											{cbtExplainedContent.walkAndTalk[2]}
+										</h3>
+									</div>
+								</TextBox>
 							</div>
-						</TextBox>
-					</div>
-					<div
-						className={`${
-							abridged ? "hidden" : "flex"
-						} w-full justify-center align-middle items-center px-20`}>
-						<Image
-							src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/cabotTower.png'
-							alt='Company logo'
-							width={600}
-							height={720}
-						/>
-					</div>
-					<TextBox
-						className={`${
-							abridged ? "hidden" : "flex"
-						} justify-end w-full text-center mx-auto mb-20`}>
-						<h3 className='text-center w-full text-primary-secondary text-xl font-light self-center p-4'>
-							{cbtExplainedContent.walkAndTalk[3]}
-						</h3>
-					</TextBox>
+							<div
+								className={`${
+									abridged ? "flex" : "hidden"
+								} w-full justify-center align-middle items-center px-20`}>
+								<Image
+									src='https://ngtfjhkkqhatjugocvhh.supabase.co/storage/v1/object/public/images/cabotTower.png'
+									alt='Company logo'
+									width={600}
+									height={720}
+								/>
+							</div>
+							<TextBox
+								className={`${
+									abridged ? "hidden" : "flex"
+								} justify-end w-full text-center mx-auto mb-20`}>
+								<h3 className='text-center w-full text-primary-secondary text-xl font-light self-center p-4'>
+									{cbtExplainedContent.walkAndTalk[3]}
+								</h3>
+							</TextBox>
+						</>
+					) : (
+						<></>
+					)}
 				</div>
 			</div>
 		</>

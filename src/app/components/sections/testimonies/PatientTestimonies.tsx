@@ -65,7 +65,7 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 
 			<div
 				id={id}
-				className='relative grid grid-cols-1 md:grid-cols-2 gap-16 w-[90%] max-w-5xl mt-20 py-10'>
+				className='relative grid grid-cols-1 md:grid-cols-2 gap-16 w-[90%] max-w-5xl mt-10 py-10'>
 				{testimonials.map((testimonial, idx) => (
 					<div key={idx} className='group relative w-full h-full'>
 						{/* Collapsed Card (default visible) */}
@@ -110,9 +110,9 @@ const PatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 										<p className='text-primary-secondary text-lg text-center md:text-left mb-4'>
 											{testimonial.text}
 										</p>
-										<p className='text-primary text-lg text-left md:text-left pt-0 font-medium'>
+										{/* <p className='text-primary text-lg text-left md:text-left pt-0 font-medium'>
 											{testimonial.name}
-										</p>
+										</p> */}
 									</div>
 									<FaQuoteRight
 										className='text-primary place-self-end mb-2 shrink-0'

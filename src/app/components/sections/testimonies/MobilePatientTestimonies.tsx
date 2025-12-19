@@ -162,16 +162,14 @@ const MobilePatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 	if (loading || !content.length) return <LoadingBlock />;
 
 	return (
-		<section
-			id={id}
-			className='flex flex-col items-center w-full pt-20 px-4'>
-			<div className='w-full max-w-md -ml-20 mb-9'>
+		<section id={id} className='flex flex-col items-center w-full pt-20'>
+			<div className='w-[120%] mb-9'>
 				<SectionTitleClear title='What People Say' mobileScreen />
 			</div>
 			<div
 				ref={containerRef}
 				className={[
-					"relative w-[110%] pt-16 px-[7.5%] bg-zinc-100 rounded-xl h-full min-h-[420px] py-10 border-y-2 border-primary-secondary/20",
+					"relative w-full py-16 px-[7.5%] bg-zinc-100 rounded-xl h-full min-h-[460px] border-y-2 border-primary-secondary/20",
 					"overflow-y-auto overscroll-contain",
 					"snap-y snap-normal"
 				].join(" ")}
@@ -181,7 +179,7 @@ const MobilePatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 					scrollbarWidth: "none"
 				}}
 				aria-live='polite'>
-				<div className='flex flex-col gap-6 mt-8 py-10 pb-16'>
+				<div className='flex flex-col gap-6 mt-8 py-4 pb-16'>
 					{content.map((t, idx) => {
 						const isActive = idx === activeIndex;
 						const expanded = expandedIndex === idx;
@@ -278,7 +276,7 @@ const MobilePatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 													<div className='pointer-events-none absolute inset-x-3 bottom-3 h-8 bg-gradient-to-b from-transparent to-white' />
 												)}
 
-												<p
+												{/* <p
 													className={[
 														"mt-3 text-primary text-base sm:text-lg font-medium text-left",
 														"transition-opacity duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)]",
@@ -287,7 +285,7 @@ const MobilePatientTestimonials = ({ id }: { id: string }): JSX.Element => {
 															: "opacity-0"
 													].join(" ")}>
 													{t.name}
-												</p>
+												</p> */}
 											</div>
 
 											{/* Right quote */}

@@ -86,18 +86,18 @@ const MobileClinicalExperience = (): JSX.Element => {
 	const active = rows[currentIndex];
 
 	return (
-		<div className='flex flex-col w-[90%] text-slate-800  justify-center mx-auto'>
-			<div className='w-[140%] -ml-10'>
+		<div className='flex flex-col w-full text-slate-800 my-10 justify-center mx-auto'>
+			<div className='w-[140%] -ml-14'>
 				<SectionTitleClear
 					title={textBlocks.section_title}
 					className=''
 					mobileScreen
 				/>
 			</div>
-			<div className='w-full my-8 mt-10' />
+			<div className='w-full my-4 mb-16' />
 			<p
 				className={[
-					"w-full max-w-sm mx-auto text-center text-primary-secondary text-lg leading-relaxed",
+					"w-full max-w-md mx-auto text-center text-primary-secondary text-lg leading-relaxed",
 					"transition-all duration-700",
 					prefersReduced
 						? "opacity-100 translate-y-0"
@@ -128,11 +128,11 @@ const MobileClinicalExperience = (): JSX.Element => {
 				<div
 					aria-label='Clinical categories'
 					className='flex flex-col md:flex-row justify-start items-center space-y-6 w-[15%] md:w-full'>
-					{rows.map((svc, index) => {
+					{rows.map((row, index) => {
 						const active = index === currentIndex;
 						return (
 							<button
-								key={svc.category}
+								key={row.category}
 								type='button'
 								role='tab'
 								aria-selected={active}
@@ -140,10 +140,10 @@ const MobileClinicalExperience = (): JSX.Element => {
 								tabIndex={active ? 0 : -1}
 								onClick={() => setCurrentIndex(index)}
 								className='cursor-pointer '
-								aria-label={`Select ${svc.category}`}>
+								aria-label={`Select ${row.category}`}>
 								<Image
-									src={svc.icon}
-									alt={`${svc.category} icon`}
+									src={row.icon}
+									alt={`${row.category} icon`}
 									width={active ? 60 : 50}
 									height={active ? 60 : 50}
 									sizes='(max-width: 640px) 60px, 60px'

@@ -1,4 +1,3 @@
-// src/app/page.tsx
 import { HeroSection } from "./components/sections/hero/HeroSection";
 import ContactForm from "./components/sections/contact/Home/ContactForm";
 import PatientTestimonials from "./components/sections/testimonies/PatientTestimonies";
@@ -59,7 +58,6 @@ export default async function Home() {
 			<div className='sm:hidden flex'>
 				<MobileAboutMe id='about-me' />
 			</div>
-			{/* <div className='my-2 md:my-8' /> */}
 			<div className='sm:flex flex-col hidden'>
 				<SectionTitleClear title={`What can I expect from therapy?`} />
 				<CBTExplained />
@@ -67,7 +65,6 @@ export default async function Home() {
 			<div className='sm:hidden flex'>
 				<MobileCBTExplained />
 			</div>
-			{/* <div className='my-2 md:my-8' /> */}
 			<div className='sm:flex flex-col hidden'>
 				<WhyChooseMe />
 			</div>
@@ -75,7 +72,6 @@ export default async function Home() {
 				<MobileWhyChooseMe />
 			</div>
 
-			{/* <div className='my-2 md:my-8' /> */}
 			<div className='sm:flex flex-col hidden'>
 				<AnimatedSectionTitle title={`Services offered`} />
 				<ClinicalExperience />
@@ -83,7 +79,6 @@ export default async function Home() {
 			<div className='sm:hidden flex'>
 				<MobileClinicalExperience />
 			</div>
-			{/* <div className='my-2 md:my-8' /> */}
 			<div className='sm:flex flex-col hidden'>
 				<PatientTestimonials id='testimonies' />
 			</div>
